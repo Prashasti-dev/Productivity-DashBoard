@@ -1,9 +1,21 @@
-let allElem=document.querySelectorAll('.elem')
-let allFUllElems =document.querySelectorAll('.fullElem')
 
-allElem.forEach(function(elem){
+function openFeatures(){
+let allElems=document.querySelectorAll('.elem')
+let fullElemPage =document.querySelectorAll('.fullElem')
+let fullElemPageBackBtn=document.querySelectorAll('.fullElem .back')
+
+allElems.forEach(function(elem){
 
     elem.addEventListener('click',function(){
-        allFUllElems[elem.id].style.display='block'
+        fullElemPage[elem.id].style.display='block'
     })
 })
+
+fullElemPageBackBtn.forEach(function(back){
+        back.addEventListener('click',function(){
+            fullElemPage[back.id].style.display='none'
+        })
+})
+
+}
+openFeatures()
