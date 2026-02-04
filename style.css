@@ -1,9 +1,9 @@
 
 :root{
-    --pri:#2F3E34;
-    --sec:#3A5A40;
-    --tri1:#d7d7b9;
-    --tri2:#9CAF88;
+    --pri:#191C24;
+    --sec:#AF1763;
+    --tri1:#7978E9;
+    --tri2:#F3797E;
 }
 @font-face {
     font-family: light;
@@ -60,7 +60,7 @@ section.allElems{
     position: absolute;
 }
 .elem{
-    background-color: #73946B;
+    background-color: var(--pri);
     height: 400px;
     width: 260px;
     position: relative;
@@ -69,6 +69,7 @@ section.allElems{
     transition: all ease 0.9s;
     cursor: pointer;
     box-shadow: 0 5px 20px rgba(166, 163, 163, 0.2);
+    color: black;
 
 }
 .elem img{
@@ -93,7 +94,7 @@ section.allElems{
     background-color: var(--pri);
     color: var(--tri1);
     padding: 40px;
-    font-size: 60px;
+    font-size: 12px;
     display: none;
     position: absolute;
 }
@@ -102,7 +103,7 @@ section.allElems{
     position: absolute;
     padding: 11;
     right: 5%;
-    background-color: rgba(255, 0, 0, 0.84);
+    background-color: rgba(223, 43, 43, 0.84);
     border-radius: 50%;
     font-size: 20px;
     font-weight: 700;
@@ -114,4 +115,17 @@ section.allElems{
 .back:active{
     
     scale: 0.95;
+}
+
+.todo-list-fullpage{
+   display: block;
+}
+.todo-list-fullpage h1{
+    font-size: 35px;
+}
+.todo-list-fullpage .todo-container{
+    height: 70%;
+    width: 100%;
+    background-color: var(--sec);
+    margin-top: 10px;
 }
