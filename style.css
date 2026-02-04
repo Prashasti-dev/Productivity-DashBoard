@@ -1,8 +1,8 @@
 
 :root{
     --pri:#191C24;
-    --sec:#AF1763;
-    --tri1:#7978E9;
+    --sec:#c72878;
+    --tri1:#4645aa;
     --tri2:#F3797E;
 }
 @font-face {
@@ -92,7 +92,7 @@ section.allElems{
     height: 100%;
     width: 100%;
     background-color: var(--pri);
-    color: var(--tri1);
+    color: var(--sec);
     padding: 40px;
     font-size: 12px;
     display: none;
@@ -126,6 +126,68 @@ section.allElems{
 .todo-list-fullpage .todo-container{
     height: 70%;
     width: 100%;
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.todo-list-fullpage .todo-container .addTask{
+    width: 33%;
+    height: 100%;
+    background-color: var(--tri1);
+        border-radius: 15px;
+
+}
+.todo-list-fullpage .todo-container .allTask{
+     width: 65%;
+    height: 100%;
+    background-color: var(--tri1);
+    border-radius: 15px;
+
+}
+
+.todo-list-fullpage .todo-container .addTask form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+}
+.todo-list-fullpage .todo-container form input{
+    padding: 15px 25px;
+    width: 100%;
+    font-size: 25px;
+
+    border-radius: 5px;
+    background-color: var(--pri);
+    border: none;
+    outline: none;
+    margin-bottom: 20px;
+}
+.todo-list-fullpage .todo-container form textarea{
+    padding: 15px 25px;
+    width: 100%;
+    font-size: 25px;
+    border-radius: 5px;
+    background-color: var(--pri);
+    border: none;
+    outline: none;
+    margin-bottom: 20px;
+}
+.todo-list-fullpage .todo-container form button{
+    padding: 15px 25px;
+    width: 100%;
+    font-size: 25px;
+    border-radius: 5px;
     background-color: var(--sec);
-    margin-top: 10px;
+    border: none;
+    outline: none;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+.todo-list-fullpage .todo-container form button{
+  transition: transform 0.2s ease;
+}
+
+.todo-list-fullpage .todo-container form button:active{
+  transform: scale(0.95);
 }
