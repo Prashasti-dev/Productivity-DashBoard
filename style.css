@@ -4,6 +4,7 @@
     --sec:#c72878;
     --tri1:#4645aa;
     --tri2:#F3797E;
+    --red: rgba(223, 43, 43, 0.84);
 }
 @font-face {
     font-family: light;
@@ -124,7 +125,7 @@ section.allElems{
     font-size: 35px;
 }
 .todo-list-fullpage .todo-container{
-    height: 70%;
+    height: 80%;
     width: 100%;
     margin-top: 30px;
     display: flex;
@@ -135,15 +136,20 @@ section.allElems{
     width: 33%;
     height: 100%;
     background-color: var(--tri1);
-        border-radius: 15px;
+    border-radius: 15px;
 
 }
 .todo-list-fullpage .todo-container .allTask{
-     width: 65%;
+    width: 65%;
     height: 100%;
     background-color: var(--tri1);
-    border-radius: 15px;
-
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 30px;
+    overflow:auto;
+    
 }
 
 .todo-list-fullpage .todo-container .addTask form{
@@ -156,29 +162,31 @@ section.allElems{
     padding: 15px 25px;
     width: 100%;
     font-size: 25px;
-
     border-radius: 5px;
     background-color: var(--pri);
     border: none;
     outline: none;
+    color: #f2eaee;
     margin-bottom: 20px;
 }
+
 .todo-list-fullpage .todo-container form textarea{
     padding: 15px 25px;
     width: 100%;
     font-size: 25px;
     border-radius: 5px;
     background-color: var(--pri);
+    color: #f2eaee;
     border: none;
     outline: none;
     margin-bottom: 20px;
 }
 .todo-list-fullpage .todo-container form button{
-    padding: 15px 25px;
+        padding: 12px 22px;
     width: 100%;
     font-size: 25px;
     border-radius: 5px;
-    background-color: var(--sec);
+    background-color: rgba(223, 43, 43, 0.84);
     border: none;
     outline: none;
     font-weight: 700;
@@ -190,4 +198,30 @@ section.allElems{
 
 .todo-list-fullpage .todo-container form button:active{
   transform: scale(0.95);
+}
+
+.task{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    font-size: 25px;
+    background-color: #f2eaee;
+     padding: 10px 15px;
+   border-radius: 5px;
+   margin-bottom: 15px;
+   
+}
+.task h5{
+    color: var(--pri);
+    font-size: 30px;
+}
+.task button{
+    padding: 12px 22px;
+    color: var(--pri);
+    background-color:rgb(7, 192, 7);
+    font-size: 20x;
+    border-radius: 5px;
+    border: none;
+    font-weight: 600;
 }

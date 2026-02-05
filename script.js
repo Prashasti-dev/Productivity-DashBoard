@@ -18,4 +18,10 @@ fullElemPageBackBtn.forEach(function(back){
 })
 
 }
-openFeatures()
+
+let form=document.querySelector('.addTask form')
+
+form.addEventListener('submit',function(e){
+    e.preventDefault()
+    console.log('hello');
+})
