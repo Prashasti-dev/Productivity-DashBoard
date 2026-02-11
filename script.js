@@ -27,18 +27,24 @@ let taskInput=document.querySelector('.addTask form input')
 let taskDetailsInput=document.querySelector('.addTask form textarea')
 let taskCheckBox=document.querySelector('.addTask form #check')
 
-var currTask=[]
+var currentTask=[]
 
 
 
-var allTaskList =localStorage.getItem('allTaskList')
+if(localStorage.getItem('currentTask')){
+    currentTask=JSON.parse(localStorage.getItem('currentTask'))
+}
+else{
+    console.log('Task list is Empty');
+    
+}
 
 function renderTask(){
     let allTask=document.querySelector('.allTask')
 
 let sum =''
 
-currTask.forEach(function(elem){
+currentTask.forEach(function(elem){
 
      if (!elem.task || !elem.details) {
             return;
@@ -58,16 +64,15 @@ form.addEventListener('submit',function(e){
      console.log(taskDetailsInput.value);
         console.log(taskCheckBox.checked);
 
-         if (taskInput === "" ||taskDetailsInput === "") {
-        alert("Please enter both Task and Details!");
-        return;   // stops here, nothing will be added
-    }
-        currTask.push(
+    
+        currentTask.push(
             {
              task:taskInput.value,
              details:taskDetailsInput.value,
              imp:taskCheckBox.checked
             })
+
+            localStorage.setItem('currentTask',JSON.stringify(currentTask))
             taskInput.value=''
             taskDetailsInput.value=''
             taskCheckBox.checked=false;
