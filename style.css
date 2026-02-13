@@ -118,9 +118,9 @@ section.allElems{
     scale: 0.95;
 }
 
-.todo-list-fullpage{
+/* .todo-list-fullpage{
    display: block;
-}
+} */
 .todo-list-fullpage h1{
     font-size: 35px;
 }
