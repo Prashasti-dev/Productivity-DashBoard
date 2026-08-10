@@ -27,7 +27,54 @@ openFeatures();
 
 
 // ---------------------------------------------------------
-// 2. TO-DO LIST MODULE
+// 2. HERO DYNAMIC DATE & GREETING GENERATOR
+// ---------------------------------------------------------
+function initHeroGreeting() {
+  let dateTextElem = document.querySelector("#hero-date-text");
+  let greetingElem = document.querySelector("#hero-time-greeting");
+
+  let now = new Date();
+  
+  // Format Date: "Tuesday, August 11"
+  let options = { weekday: 'long', month: 'long', day: 'numeric' };
+  let formattedDate = now.toLocaleDateString('en-US', options);
+
+  // Time-based Greeting
+  let hour = now.getHours();
+  let greeting = "Good evening 👋";
+  if (hour < 12) {
+    greeting = "Good morning ☀️";
+  } else if (hour < 17) {
+    greeting = "Good afternoon 🌤️";
+  }
+
+  if (dateTextElem) dateTextElem.textContent = formattedDate;
+  if (greetingElem) greetingElem.textContent = greeting;
+}
+initHeroGreeting();
+
+
+
+
+
+// ---------------------------------------------------------
+// 4. THEME TOGGLE LOGIC
+// ---------------------------------------------------------
+function initThemeToggle() {
+  let toggleBtn = document.querySelector("#theme-toggle-btn");
+  if (toggleBtn) {
+    toggleBtn.addEventListener("click", () => {
+      document.body.classList.toggle("light-theme");
+      let isLight = document.body.classList.contains("light-theme");
+      toggleBtn.innerHTML = isLight ? `<i class="ri-moon-line"></i>` : `<i class="ri-sun-line"></i>`;
+    });
+  }
+}
+initThemeToggle();
+
+
+// ---------------------------------------------------------
+// 5. TO-DO LIST MODULE
 // ---------------------------------------------------------
 function todolist() {
   let form = document.querySelector(".addTask form");
@@ -83,7 +130,7 @@ todolist();
 
 
 // ---------------------------------------------------------
-// 3. DAILY PLANNER MODULE
+// 6. DAILY PLANNER MODULE
 // ---------------------------------------------------------
 function dailyPlanner() {
   let plannerForm = document.querySelector("#planner-form");
@@ -148,7 +195,7 @@ dailyPlanner();
 
 
 // ---------------------------------------------------------
-// 4. AMBIENT PHOTOGRAPHIC POMODORO MODULE
+// 7. AMBIENT PHOTOGRAPHIC POMODORO MODULE
 // ---------------------------------------------------------
 function pomodoroTimer() {
   let sectionPage = document.querySelector(".pomodoro-full-page");
@@ -304,7 +351,7 @@ pomodoroTimer();
 
 
 // ---------------------------------------------------------
-// 5. DAILY GOALS MODULE
+// 8. DAILY GOALS MODULE
 // ---------------------------------------------------------
 function dailyGoals() {
   let form = document.querySelector("#goals-form");
@@ -368,7 +415,7 @@ dailyGoals();
 
 
 // ---------------------------------------------------------
-// 6. MOOD-BASED MOTIVATION QUOTES MODULE
+// 9. MOOD-BASED MOTIVATION QUOTES MODULE
 // ---------------------------------------------------------
 function motivation() {
   let quoteText = document.querySelector("#quote-text");
