@@ -75,24 +75,106 @@
 
         <section class="fullElem daily-planner-fullpage">
             <button class="back" id="1"><i class="ri-close-line"></i></button>
-
             <h1>Daily Planner</h1>
+            <div class="planner-container">
+                <div class="planner-add">
+                    <h2>Add Schedule</h2>
+                    <form id="planner-form">
+                        <input type="time" id="planner-time" required>
+                        <input type="text" id="planner-task" placeholder="Enter activity..." required>
+                        <button type="submit">Add Slot</button>
+                    </form>
+                    <div class="planner-notes">
+                        <h2>Quick Notes</h2>
+                        <textarea id="planner-notes-input" rows="7" placeholder="Jot down notes for today..."></textarea>
+                    </div>
+                </div>
+                <div class="planner-list">
+                    <h2>Today's Schedule</h2>
+                    <div class="schedule-items"></div>
+                </div>
+            </div>
         </section>
 
-        <section class="fullElem pomodoro-full-page">
+        <section class="fullElem pomodoro-full-page" data-theme="work">
+            <!-- Dynamic Background Layers for Crossfade -->
+            <div class="pomo-bg-layer active" id="pomo-bg-1"></div>
+            <div class="pomo-bg-layer" id="pomo-bg-2"></div>
+            <div class="pomo-photo-overlay"></div>
+
             <button class="back" id="2"><i class="ri-close-line"></i></button>
 
-            <h1>Pomodoro Timer</h1>
+            <div class="pomofocus-wrapper">
+                <!-- Header -->
+                <header class="pomo-header-nav">
+                    <div class="pomo-logo">
+                        <i class="ri-compass-3-fill"></i>
+                        <span>Ambient Focus</span>
+                    </div>
+                </header>
+
+                <!-- Floating Glassmorphism Timer Box -->
+                <div class="pomo-ambient-content">
+                    <div class="pomo-modes">
+                        <button class="pomo-tab active" data-mode="work">Pomodoro</button>
+                        <button class="pomo-tab" data-mode="shortBreak">Short Break</button>
+                        <button class="pomo-tab" data-mode="longBreak">Long Break</button>
+                    </div>
+
+                    <div class="pomo-timer-display" id="pomo-display">25:00</div>
+
+                    <div class="pomo-start-wrapper">
+                        <button class="pomo-start-btn" id="pomo-start">START</button>
+                        <button class="pomo-action-icon" id="pomo-reset-btn" title="Reset Timer"><i class="ri-restart-line"></i></button>
+                        <button class="pomo-action-icon" id="pomo-skip" title="Skip Session"><i class="ri-skip-forward-fill"></i></button>
+                    </div>
+
+                    <div class="pomo-session-info">
+                        <span class="session-status" id="pomo-status">Time to focus!</span>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <section class="fullElem daily-goals-fullpage">
             <button class="back" id="3"><i class="ri-close-line"></i></button>
             <h1>Daily Goals</h1>
+            <div class="goals-container">
+                <div class="goals-add">
+                    <h2>Set Today's Goal</h2>
+                    <form id="goals-form">
+                        <input type="text" id="goal-input" placeholder="e.g. Read 20 pages..." required>
+                        <button type="submit">Add Goal</button>
+                    </form>
+                    <div class="goals-progress-box">
+                        <h3>Today's Progress</h3>
+                        <div class="progress-bar-bg">
+                            <div class="progress-bar-fill" id="goal-progress-fill"></div>
+                        </div>
+                        <p id="goal-progress-text">0% Completed</p>
+                    </div>
+                </div>
+                <div class="goals-list-box">
+                    <h2>Goal Checklist</h2>
+                    <div class="all-goals"></div>
+                </div>
+            </div>
         </section>
 
         <section class="fullElem motivation-fullpage">
             <button class="back" id="4"><i class="ri-close-line"></i></button>
             <h1>Motivation</h1>
+            <div class="motivation-container">
+                <div class="quote-card">
+                    <i class="ri-double-quotes-l quote-icon"></i>
+                    <p class="quote-text" id="quote-text">"Believe you can and you're halfway there."</p>
+                    <h4 class="quote-author" id="quote-author">- Theodore Roosevelt</h4>
+                    <div class="quote-actions">
+                        <button id="new-quote-btn"><i class="ri-refresh-line"></i> New Quote</button>
+                        <button id="copy-quote-btn"><i class="ri-file-copy-line"></i> Copy Quote</button>
+                    </div>
+                </div>
+            </div>
         </section>
 
     </div>

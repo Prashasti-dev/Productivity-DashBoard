@@ -1,137 +1,426 @@
+// =========================================================
+// PRODUCTIVITY DASHBOARD - MAIN SCRIPT
+// Single JS file with beginner-friendly modular functions
+// =========================================================
 
-// FEATURE OPEN / CLOSE LOGIC
-
+// ---------------------------------------------------------
+// 1. FEATURE OPEN / CLOSE MODAL LOGIC
+// ---------------------------------------------------------
 function openFeatures() {
-  // All small feature boxes
   let allElems = document.querySelectorAll(".elem");
-
-  // All full screen feature pages
   let fullElemPage = document.querySelectorAll(".fullElem");
+  let backBtns = document.querySelectorAll(".fullElem .back");
 
-  // Back buttons inside full pages
-  let fullElemPageBackBtn = document.querySelectorAll(".fullElem .back");
-
-  // When small element is clicked → open its full page
-  allElems.forEach(function (elem) {
-    elem.addEventListener("click", function () {
+  // Open full-screen modal when card is clicked
+  allElems.forEach((elem) => {
+    elem.addEventListener("click", () => {
       fullElemPage[elem.id].style.display = "block";
     });
   });
 
-  // When back button is clicked → close full page
-  fullElemPageBackBtn.forEach(function (back) {
-    back.addEventListener("click", function () {
+  // Close modal when close button is clicked
+  backBtns.forEach((back) => {
+    back.addEventListener("click", () => {
       fullElemPage[back.id].style.display = "none";
     });
   });
 }
-openFeatures(); // calling the function
+openFeatures();
 
 
-// TODO LIST LOGIC STARTS HERE
-
-
-// Selecting form elements
-let form = document.querySelector(".addTask form");
-let taskInput = document.querySelector(".addTask form input");
-let taskDetailsInput = document.querySelector(".addTask form textarea");
-let taskCheckBox = document.querySelector(".addTask form #check");
-
+// ---------------------------------------------------------
+// 2. TO-DO LIST MODULE
+// ---------------------------------------------------------
 function todolist() {
+  let form = document.querySelector(".addTask form");
+  let taskInput = document.querySelector(".addTask form input");
+  let taskDetailsInput = document.querySelector(".addTask form textarea");
+  let taskCheckBox = document.querySelector(".addTask form #check");
+  let allTaskContainer = document.querySelector(".allTask");
 
-  // Array to store all tasks
-  var currentTask = [];
+  let currentTask = JSON.parse(localStorage.getItem("currentTask")) || [];
 
-  // Load tasks from localStorage if present
-  if (localStorage.getItem("currentTask")) {
-    currentTask = JSON.parse(localStorage.getItem("currentTask"));
-  }
-
-  // ---------------------------
-  // FUNCTION TO RENDER TASKS
-  // ---------------------------
   function renderTask() {
-
-    // Save updated task list to localStorage
     localStorage.setItem("currentTask", JSON.stringify(currentTask));
-
-    let allTask = document.querySelector(".allTask");
-    let sum = "";
-
-    // Loop through each task and create HTML
-    currentTask.forEach(function (elem, idx) {
-
-      // Skip if task or details are empty
+    let html = "";
+    currentTask.forEach((elem, idx) => {
       if (!elem.task || !elem.details) return;
-
-      sum += `
+      html += `
         <div class="task">
           <details>
             <summary>
-              <h5>
-                ${elem.task}
-                <span class="${elem.imp ? 'important' : ''}">imp</span>
-              </h5>
+              <h5>${elem.task} <span class="${elem.imp ? 'important' : ''}">imp</span></h5>
             </summary>
             <p>${elem.details}</p>
           </details>
           <button id="${idx}">Mark as completed</button>
-        </div>
-      `;
+        </div>`;
     });
-
-    // Insert all tasks into the page
-    allTask.innerHTML = sum;
+    allTaskContainer.innerHTML = html;
   }
 
-  // First time rendering when page loads
   renderTask();
 
-
-
-  // ---------------------------
-  // ADD NEW TASK (FORM SUBMIT)
-  // ---------------------------
-  form.addEventListener("submit", function (e) {
+  form.addEventListener("submit", (e) => {
     e.preventDefault();
-
-    // Add new task to array
     currentTask.push({
       task: taskInput.value,
       details: taskDetailsInput.value,
       imp: taskCheckBox.checked,
     });
-
-    // Clear inputs after adding
     taskInput.value = "";
     taskDetailsInput.value = "";
     taskCheckBox.checked = false;
-
-    // Re-render tasks
     renderTask();
   });
 
-
-
-  // ---------------------------
-  // MARK TASK AS COMPLETED
-  // (Event Delegation Technique)
-  // ---------------------------
-  document.querySelector(".allTask").addEventListener("click", function (e) {
-
-    // Check if clicked element is a button
+  allTaskContainer.addEventListener("click", (e) => {
     if (e.target.tagName === "BUTTON") {
-
-      // Remove that task using button id
       currentTask.splice(e.target.id, 1);
-
-      // Re-render updated list
       renderTask();
     }
   });
-
 }
-
-// Call the todo list function
 todolist();
-localStorage.clear();
+
+
+// ---------------------------------------------------------
+// 3. DAILY PLANNER MODULE
+// ---------------------------------------------------------
+function dailyPlanner() {
+  let plannerForm = document.querySelector("#planner-form");
+  let timeInput = document.querySelector("#planner-time");
+  let taskInput = document.querySelector("#planner-task");
+  let notesInput = document.querySelector("#planner-notes-input");
+  let scheduleItemsContainer = document.querySelector(".schedule-items");
+
+  let scheduleList = JSON.parse(localStorage.getItem("plannerSchedule")) || [];
+  let storedNotes = localStorage.getItem("plannerNotes") || "";
+
+  if (notesInput) notesInput.value = storedNotes;
+
+  function renderSchedule() {
+    localStorage.setItem("plannerSchedule", JSON.stringify(scheduleList));
+    scheduleList.sort((a, b) => a.time.localeCompare(b.time));
+
+    let html = "";
+    scheduleList.forEach((item, index) => {
+      html += `
+        <div class="schedule-item">
+          <div>
+            <span class="time-tag">${item.time}</span>
+            <span class="task-name">${item.task}</span>
+          </div>
+          <button data-index="${index}">Delete</button>
+        </div>`;
+    });
+    if (scheduleItemsContainer) scheduleItemsContainer.innerHTML = html;
+  }
+
+  renderSchedule();
+
+  if (plannerForm) {
+    plannerForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      if (!timeInput.value || !taskInput.value.trim()) return;
+      scheduleList.push({ time: timeInput.value, task: taskInput.value.trim() });
+      timeInput.value = "";
+      taskInput.value = "";
+      renderSchedule();
+    });
+  }
+
+  if (scheduleItemsContainer) {
+    scheduleItemsContainer.addEventListener("click", (e) => {
+      if (e.target.tagName === "BUTTON") {
+        let idx = e.target.getAttribute("data-index");
+        scheduleList.splice(idx, 1);
+        renderSchedule();
+      }
+    });
+  }
+
+  if (notesInput) {
+    notesInput.addEventListener("input", () => {
+      localStorage.setItem("plannerNotes", notesInput.value);
+    });
+  }
+}
+dailyPlanner();
+
+
+// ---------------------------------------------------------
+// 4. AMBIENT PHOTOGRAPHIC POMODORO MODULE
+// ---------------------------------------------------------
+function pomodoroTimer() {
+  let sectionPage = document.querySelector(".pomodoro-full-page");
+  let display = document.querySelector("#pomo-display");
+  let statusText = document.querySelector("#pomo-status");
+  let startBtn = document.querySelector("#pomo-start");
+  let resetBtn = document.querySelector("#pomo-reset-btn");
+  let skipBtn = document.querySelector("#pomo-skip");
+  let tabs = document.querySelectorAll(".pomo-tab");
+
+  let bgLayer1 = document.querySelector("#pomo-bg-1");
+  let bgLayer2 = document.querySelector("#pomo-bg-2");
+  let activeBgIndex = 1;
+
+  // High-Resolution Unsplash Photography per Mode
+  const photoCollections = {
+    work: [
+      "https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&w=1920&q=80",
+      "https://images.unsplash.com/photo-1514565131-fce0801e5785?auto=format&fit=crop&w=1920&q=80"
+    ],
+    shortBreak: [
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=80",
+      "https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=1920&q=80"
+    ],
+    longBreak: [
+      "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1920&q=80",
+      "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1920&q=80"
+    ]
+  };
+
+  let durations = { work: 25 * 60, shortBreak: 5 * 60, longBreak: 15 * 60 };
+  let captions = { work: "Time to focus!", shortBreak: "Time for a break!", longBreak: "Long break!" };
+
+  let currentMode = "work";
+  let sessionCount = 1;
+  let timerInterval = null;
+  let isRunning = false;
+  let remainingSeconds = durations.work;
+
+  // Smooth Crossfade Background Image Switcher
+  function updateBackground(mode) {
+    let list = photoCollections[mode];
+    if (!list || list.length === 0) return;
+
+    let newUrl = list[0];
+    let currentLayer = activeBgIndex === 1 ? bgLayer1 : bgLayer2;
+    let nextLayer = activeBgIndex === 1 ? bgLayer2 : bgLayer1;
+
+    if (!nextLayer || !currentLayer) return;
+
+    let img = new Image();
+    img.src = newUrl;
+    img.onload = () => {
+      nextLayer.style.backgroundImage = `url("${newUrl}")`;
+      nextLayer.classList.add("active");
+      currentLayer.classList.remove("active");
+      activeBgIndex = activeBgIndex === 1 ? 2 : 1;
+    };
+  }
+
+  if (bgLayer1) bgLayer1.style.backgroundImage = `url("${photoCollections.work[0]}")`;
+
+  // Gentle Web Audio API Chime Notification
+  function playChime() {
+    try {
+      let AudioContext = window.AudioContext || window.webkitAudioContext;
+      if (!AudioContext) return;
+      let ctx = new AudioContext();
+      let now = ctx.currentTime;
+      let osc = ctx.createOscillator();
+      let gain = ctx.createGain();
+      osc.type = "sine";
+      osc.frequency.setValueAtTime(523.25, now);
+      gain.gain.setValueAtTime(0.3, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.8);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(now);
+      osc.stop(now + 0.8);
+    } catch (e) {}
+  }
+
+  function formatTime(sec) {
+    let m = Math.floor(sec / 60);
+    let s = sec % 60;
+    return `${m < 10 ? '0' : ''}${m}:${s < 10 ? '0' : ''}${s}`;
+  }
+
+  function updateDisplay() {
+    let timeStr = formatTime(remainingSeconds);
+    if (display) display.textContent = timeStr;
+    document.title = `${timeStr} - ${captions[currentMode]}`;
+    if (statusText) statusText.textContent = captions[currentMode];
+  }
+
+  function setTheme(mode) {
+    currentMode = mode;
+    if (sectionPage) sectionPage.setAttribute("data-theme", mode);
+    tabs.forEach((tab) => {
+      tab.classList.toggle("active", tab.getAttribute("data-mode") === mode);
+    });
+    updateBackground(mode);
+    pauseTimer();
+    remainingSeconds = durations[mode];
+    updateDisplay();
+  }
+
+  function toggleTimer() {
+    if (!isRunning) {
+      isRunning = true;
+      startBtn.textContent = "PAUSE";
+      timerInterval = setInterval(() => {
+        if (remainingSeconds > 0) {
+          remainingSeconds--;
+          updateDisplay();
+        } else {
+          pauseTimer();
+          playChime();
+          if (currentMode === "work") {
+            sessionCount++;
+            setTheme(sessionCount % 4 === 0 ? "longBreak" : "shortBreak");
+          } else {
+            setTheme("work");
+          }
+        }
+      }, 1000);
+    } else {
+      pauseTimer();
+    }
+  }
+
+  function pauseTimer() {
+    clearInterval(timerInterval);
+    isRunning = false;
+    if (startBtn) startBtn.textContent = "START";
+  }
+
+  function resetTimer() {
+    pauseTimer();
+    remainingSeconds = durations[currentMode];
+    updateDisplay();
+  }
+
+  function skipSession() {
+    playChime();
+    if (currentMode === "work") {
+      sessionCount++;
+      setTheme(sessionCount % 4 === 0 ? "longBreak" : "shortBreak");
+    } else {
+      setTheme("work");
+    }
+  }
+
+  tabs.forEach((tab) => {
+    tab.addEventListener("click", () => setTheme(tab.getAttribute("data-mode")));
+  });
+
+  if (startBtn) startBtn.addEventListener("click", toggleTimer);
+  if (resetBtn) resetBtn.addEventListener("click", resetTimer);
+  if (skipBtn) skipBtn.addEventListener("click", skipSession);
+
+  updateDisplay();
+}
+pomodoroTimer();
+
+
+// ---------------------------------------------------------
+// 5. DAILY GOALS MODULE
+// ---------------------------------------------------------
+function dailyGoals() {
+  let form = document.querySelector("#goals-form");
+  let input = document.querySelector("#goal-input");
+  let goalsContainer = document.querySelector(".all-goals");
+  let progressFill = document.querySelector("#goal-progress-fill");
+  let progressText = document.querySelector("#goal-progress-text");
+
+  let goalsList = JSON.parse(localStorage.getItem("dailyGoals")) || [];
+
+  function renderGoals() {
+    localStorage.setItem("dailyGoals", JSON.stringify(goalsList));
+    let html = "";
+    let completedCount = 0;
+
+    goalsList.forEach((goal, idx) => {
+      if (goal.completed) completedCount++;
+      html += `
+        <div class="goal-item ${goal.completed ? 'completed' : ''}">
+          <div class="goal-item-left">
+            <input type="checkbox" data-index="${idx}" ${goal.completed ? 'checked' : ''}>
+            <span class="goal-text">${goal.text}</span>
+          </div>
+          <button data-index="${idx}">Delete</button>
+        </div>`;
+    });
+
+    if (goalsContainer) goalsContainer.innerHTML = html;
+
+    let percentage = goalsList.length > 0 ? Math.round((completedCount / goalsList.length) * 100) : 0;
+    if (progressFill) progressFill.style.width = percentage + "%";
+    if (progressText) progressText.textContent = `${percentage}% Completed (${completedCount}/${goalsList.length})`;
+  }
+
+  renderGoals();
+
+  if (form) {
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      if (!input.value.trim()) return;
+      goalsList.push({ text: input.value.trim(), completed: false });
+      input.value = "";
+      renderGoals();
+    });
+  }
+
+  if (goalsContainer) {
+    goalsContainer.addEventListener("click", (e) => {
+      if (e.target.tagName === "BUTTON") {
+        goalsList.splice(e.target.getAttribute("data-index"), 1);
+        renderGoals();
+      } else if (e.target.tagName === "INPUT" && e.target.type === "checkbox") {
+        let idx = e.target.getAttribute("data-index");
+        goalsList[idx].completed = e.target.checked;
+        renderGoals();
+      }
+    });
+  }
+}
+dailyGoals();
+
+
+// ---------------------------------------------------------
+// 6. MOTIVATION QUOTES MODULE
+// ---------------------------------------------------------
+function motivation() {
+  let quoteText = document.querySelector("#quote-text");
+  let quoteAuthor = document.querySelector("#quote-author");
+  let newQuoteBtn = document.querySelector("#new-quote-btn");
+  let copyQuoteBtn = document.querySelector("#copy-quote-btn");
+
+  const quotes = [
+    { text: "Your time is limited, don't waste it living someone else's life.", author: "Steve Jobs" },
+    { text: "The secret of getting ahead is getting started.", author: "Mark Twain" },
+    { text: "It always seems impossible until it's done.", author: "Nelson Mandela" },
+    { text: "Don't watch the clock; do what it does. Keep going.", author: "Sam Levenson" },
+    { text: "Act as if what you do makes a difference. It does.", author: "William James" },
+    { text: "Success is not final, failure is not fatal: it is the courage to continue that counts.", author: "Winston Churchill" },
+    { text: "Focus on being productive instead of busy.", author: "Tim Ferriss" },
+    { text: "Small deeds done are better than great deeds planned.", author: "Peter Marshall" }
+  ];
+
+  function getNewQuote() {
+    let quote = quotes[Math.floor(Math.random() * quotes.length)];
+    if (quoteText) quoteText.textContent = `"${quote.text}"`;
+    if (quoteAuthor) quoteAuthor.textContent = `- ${quote.author}`;
+  }
+
+  if (newQuoteBtn) newQuoteBtn.addEventListener("click", getNewQuote);
+
+  if (copyQuoteBtn) {
+    copyQuoteBtn.addEventListener("click", () => {
+      let textToCopy = `${quoteText.textContent} ${quoteAuthor.textContent}`;
+      navigator.clipboard.writeText(textToCopy).then(() => {
+        copyQuoteBtn.innerHTML = `<i class="ri-check-line"></i> Copied!`;
+        setTimeout(() => {
+          copyQuoteBtn.innerHTML = `<i class="ri-file-copy-line"></i> Copy Quote`;
+        }, 2000);
+      });
+    });
+  }
+
+  getNewQuote();
+}
+motivation();
