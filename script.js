@@ -10,6 +10,10 @@ function openFeatures() {
   let allElems = document.querySelectorAll(".elem");
   let fullElemPage = document.querySelectorAll(".fullElem");
   let backBtns = document.querySelectorAll(".fullElem .back");
+  let navHome = document.querySelector("#nav-home");
+  let navFeatures = document.querySelector("#nav-features");
+  let featuresModal = document.querySelector("#features-modal");
+  let featuresCloseBtn = document.querySelector("#features-close-btn");
 
   allElems.forEach((elem) => {
     elem.addEventListener("click", () => {
@@ -19,9 +23,38 @@ function openFeatures() {
 
   backBtns.forEach((back) => {
     back.addEventListener("click", () => {
-      fullElemPage[back.id].style.display = "none";
+      if (back.id !== undefined && fullElemPage[back.id]) {
+        fullElemPage[back.id].style.display = "none";
+      }
     });
   });
+
+  if (navFeatures && featuresModal) {
+    navFeatures.addEventListener("click", (e) => {
+      e.preventDefault();
+      featuresModal.style.display = "block";
+      if (navHome) navHome.classList.remove("active");
+      navFeatures.classList.add("active");
+    });
+  }
+
+  if (featuresCloseBtn && featuresModal) {
+    featuresCloseBtn.addEventListener("click", () => {
+      featuresModal.style.display = "none";
+      if (navHome) navHome.classList.add("active");
+      if (navFeatures) navFeatures.classList.remove("active");
+    });
+  }
+
+  if (navHome) {
+    navHome.addEventListener("click", (e) => {
+      e.preventDefault();
+      fullElemPage.forEach((modal) => (modal.style.display = "none"));
+      if (navFeatures) navFeatures.classList.remove("active");
+      navHome.classList.add("active");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  }
 }
 openFeatures();
 
