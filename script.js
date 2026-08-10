@@ -1,6 +1,6 @@
 // =========================================================
 // PRODUCTIVITY DASHBOARD - MAIN SCRIPT
-// Single JS file with beginner-friendly modular functions
+// Clean, beginner-friendly modular script
 // =========================================================
 
 // ---------------------------------------------------------
@@ -11,14 +11,12 @@ function openFeatures() {
   let fullElemPage = document.querySelectorAll(".fullElem");
   let backBtns = document.querySelectorAll(".fullElem .back");
 
-  // Open full-screen modal when card is clicked
   allElems.forEach((elem) => {
     elem.addEventListener("click", () => {
       fullElemPage[elem.id].style.display = "block";
     });
   });
 
-  // Close modal when close button is clicked
   backBtns.forEach((back) => {
     back.addEventListener("click", () => {
       fullElemPage[back.id].style.display = "none";
@@ -165,20 +163,10 @@ function pomodoroTimer() {
   let bgLayer2 = document.querySelector("#pomo-bg-2");
   let activeBgIndex = 1;
 
-  // High-Resolution Unsplash Photography per Mode
   const photoCollections = {
-    work: [
-      "https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&w=1920&q=80",
-      "https://images.unsplash.com/photo-1514565131-fce0801e5785?auto=format&fit=crop&w=1920&q=80"
-    ],
-    shortBreak: [
-      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=80",
-      "https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=1920&q=80"
-    ],
-    longBreak: [
-      "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1920&q=80",
-      "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1920&q=80"
-    ]
+    work: ["./images/pomo_work1.jpg", "./images/pomo_work2.jpg"],
+    shortBreak: ["./images/pomo_short.jpg"],
+    longBreak: ["./images/pomo_long.jpg"]
   };
 
   let durations = { work: 25 * 60, shortBreak: 5 * 60, longBreak: 15 * 60 };
@@ -190,7 +178,6 @@ function pomodoroTimer() {
   let isRunning = false;
   let remainingSeconds = durations.work;
 
-  // Smooth Crossfade Background Image Switcher
   function updateBackground(mode) {
     let list = photoCollections[mode];
     if (!list || list.length === 0) return;
@@ -213,7 +200,6 @@ function pomodoroTimer() {
 
   if (bgLayer1) bgLayer1.style.backgroundImage = `url("${photoCollections.work[0]}")`;
 
-  // Gentle Web Audio API Chime Notification
   function playChime() {
     try {
       let AudioContext = window.AudioContext || window.webkitAudioContext;
@@ -382,32 +368,59 @@ dailyGoals();
 
 
 // ---------------------------------------------------------
-// 6. MOTIVATION QUOTES MODULE
+// 6. MOOD-BASED MOTIVATION QUOTES MODULE
 // ---------------------------------------------------------
 function motivation() {
   let quoteText = document.querySelector("#quote-text");
   let quoteAuthor = document.querySelector("#quote-author");
   let newQuoteBtn = document.querySelector("#new-quote-btn");
   let copyQuoteBtn = document.querySelector("#copy-quote-btn");
+  let moodBtns = document.querySelectorAll(".mood-btn");
 
-  const quotes = [
-    { text: "Your time is limited, don't waste it living someone else's life.", author: "Steve Jobs" },
-    { text: "The secret of getting ahead is getting started.", author: "Mark Twain" },
-    { text: "It always seems impossible until it's done.", author: "Nelson Mandela" },
-    { text: "Don't watch the clock; do what it does. Keep going.", author: "Sam Levenson" },
-    { text: "Act as if what you do makes a difference. It does.", author: "William James" },
-    { text: "Success is not final, failure is not fatal: it is the courage to continue that counts.", author: "Winston Churchill" },
-    { text: "Focus on being productive instead of busy.", author: "Tim Ferriss" },
-    { text: "Small deeds done are better than great deeds planned.", author: "Peter Marshall" }
-  ];
+  const moodQuotes = {
+    great: [
+      { text: "Keep this positive momentum going! You are unstoppable today.", author: "Daily Inspiration" },
+      { text: "Your positive energy is contagious. Spread it around!", author: "Unknown" },
+      { text: "Great things never came from comfort zones. Keep shining!", author: "Roy T. Bennett" }
+    ],
+    good: [
+      { text: "Focus on being productive instead of busy.", author: "Tim Ferriss" },
+      { text: "Small deeds done are better than great deeds planned.", author: "Peter Marshall" },
+      { text: "The secret of getting ahead is getting started.", author: "Mark Twain" }
+    ],
+    okay: [
+      { text: "It's okay to feel okay. Take it one task at a time.", author: "Gentle Reminder" },
+      { text: "Do what you can, with what you have, where you are.", author: "Theodore Roosevelt" },
+      { text: "You don't have to see the whole staircase, just take the first step.", author: "Martin Luther King Jr." }
+    ],
+    low: [
+      { text: "It always seems impossible until it's done. Take a deep breath.", author: "Nelson Mandela" },
+      { text: "Fall seven times and stand up eight. You've got this!", author: "Japanese Proverb" },
+      { text: "Tough times never last, but tough people do.", author: "Robert H. Schuller" }
+    ]
+  };
 
-  function getNewQuote() {
-    let quote = quotes[Math.floor(Math.random() * quotes.length)];
+  let activeMood = "great";
+
+  function getQuoteForMood(mood = activeMood) {
+    let list = moodQuotes[mood] || moodQuotes.great;
+    let quote = list[Math.floor(Math.random() * list.length)];
     if (quoteText) quoteText.textContent = `"${quote.text}"`;
     if (quoteAuthor) quoteAuthor.textContent = `- ${quote.author}`;
   }
 
-  if (newQuoteBtn) newQuoteBtn.addEventListener("click", getNewQuote);
+  moodBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      moodBtns.forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
+      activeMood = btn.getAttribute("data-mood");
+      getQuoteForMood(activeMood);
+    });
+  });
+
+  if (newQuoteBtn) {
+    newQuoteBtn.addEventListener("click", () => getQuoteForMood(activeMood));
+  }
 
   if (copyQuoteBtn) {
     copyQuoteBtn.addEventListener("click", () => {
@@ -421,6 +434,6 @@ function motivation() {
     });
   }
 
-  getNewQuote();
+  getQuoteForMood("great");
 }
 motivation();

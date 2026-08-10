@@ -1,5 +1,5 @@
 /* =========================================================
-   PRODUCTIVITY DASHBOARD - CLEAN & OPTIMIZED STYLES
+   PRODUCTIVITY DASHBOARD - MODERN AESTHETIC STYLES
    ========================================================= */
 
 :root {
@@ -10,16 +10,15 @@
     --red: rgba(223, 43, 43, 0.88);
 }
 
-@font-face { font-family: light; src: url(./AeonikTRIAL-Light.otf); }
-@font-face { font-family: regular; src: url(./AeonikTRIAL-Regular.otf); }
-@font-face { font-family: bold; src: url(./AeonikTRIAL-Bold.otf); }
-@font-face { font-family: regular-italic; src: url(./AeonikTRIAL-RegularItalic.otf); }
-
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: regular, sans-serif;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+h1, h2, h3, .nav-brand, .pomo-timer-display {
+    font-family: 'Outfit', 'Inter', sans-serif;
 }
 
 html, body, #main {
@@ -29,11 +28,11 @@ html, body, #main {
 }
 
 /* ---------------------------------------------------------
-   MAIN DASHBOARD & ATTRACTIVE BACKGROUND THEME
+   MAIN DASHBOARD & LOCAL BACKGROUND THEME
    --------------------------------------------------------- */
 #main {
     background: linear-gradient(180deg, rgba(17, 19, 25, 0.75) 0%, rgba(17, 19, 25, 0.9) 100%), 
-                url("https://images.unsplash.com/photo-1518655048521-f130df041f66?auto=format&fit=crop&w=1920&q=80") center/cover fixed;
+                url("./images/main_bg.jpg") center/cover fixed;
     position: relative;
 }
 
@@ -124,13 +123,11 @@ section.allElems {
 }
 
 /* ---------------------------------------------------------
-   FULL-PAGE MODAL CONTAINER & BACK BUTTON
+   FULL-PAGE MODAL BASE & BACK BUTTON
    --------------------------------------------------------- */
 .fullElem {
     height: 100%;
     width: 100%;
-    background-color: var(--pri);
-    color: var(--sec);
     padding: 40px;
     font-size: 12px;
     display: none;
@@ -138,6 +135,9 @@ section.allElems {
     top: 0;
     left: 0;
     z-index: 200;
+    background-size: cover !important;
+    background-position: center !important;
+    background-attachment: fixed !important;
 }
 
 .back {
@@ -157,16 +157,23 @@ section.allElems {
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
     transition: transform 0.2s ease;
 }
 .back:hover { transform: scale(1.08); }
 .back:active { transform: scale(0.94); }
 
 /* ---------------------------------------------------------
-   1. TO-DO LIST STYLES
+   1. TO-DO LIST THEME & GLASSMORPHISM
    --------------------------------------------------------- */
-.todo-list-fullpage h1 { font-size: 35px; }
+.todo-list-fullpage {
+    background: linear-gradient(180deg, rgba(14, 16, 24, 0.72) 0%, rgba(14, 16, 24, 0.88) 100%), 
+                url("./images/todo_bg.jpg");
+    color: #ffffff;
+}
+
+.todo-list-fullpage h1 { font-size: 35px; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+
 .todo-list-fullpage .todo-container {
     height: 80%;
     width: 100%;
@@ -175,87 +182,102 @@ section.allElems {
     align-items: center;
     justify-content: space-between;
 }
-.todo-list-fullpage .todo-container .addTask {
-    width: 33%;
-    height: 100%;
-    background-color: var(--tri1);
-    border-radius: 15px;
+
+.todo-list-fullpage .todo-container .addTask,
+.todo-list-fullpage .todo-container .allTask {
+    background: rgba(22, 25, 36, 0.65) !important;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 16px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
 }
+
+.todo-list-fullpage .todo-container .addTask { width: 33%; height: 100%; }
+
 .todo-list-fullpage .todo-container .allTask {
     width: 65%;
     height: 100%;
-    background-color: var(--tri1);
-    border-radius: 15px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     padding: 30px;
     overflow-y: auto;
 }
+
 .todo-list-fullpage .todo-container .addTask form {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 30px;
 }
+
 .todo-list-fullpage .todo-container form input,
 .todo-list-fullpage .todo-container form textarea {
     padding: 15px 25px;
     width: 100%;
-    font-size: 22px;
-    border-radius: 8px;
-    background-color: var(--pri);
-    border: none;
+    font-size: 20px;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.15);
     outline: none;
-    color: #f2eaee;
+    color: #ffffff;
     margin-bottom: 20px;
 }
+
 .todo-list-fullpage .todo-container form button {
-    padding: 12px 22px;
+    padding: 14px 22px;
     width: 100%;
     font-size: 22px;
-    border-radius: 8px;
+    border-radius: 10px;
     background-color: var(--red);
     color: white;
     border: none;
     font-weight: 700;
     cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
 }
+
 .task {
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: 100%;
     font-size: 22px;
-    background-color: #f2eaee;
-    padding: 12px 18px;
-    border-radius: 8px;
-    margin-bottom: 15px;
-}
-.task h5 {
+    background: rgba(255, 255, 255, 0.92);
     color: var(--pri);
-    font-size: 24px;
+    padding: 14px 20px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.task h5 {
+    font-size: 22px;
     display: flex;
     align-items: center;
     gap: 10px;
 }
+
 .task h5 span {
-    background-color: red;
+    background-color: var(--sec);
     color: white;
     font-size: 11px;
     padding: 3px 8px;
     border-radius: 50px;
 }
+
 .task button {
     padding: 10px 18px;
-    color: var(--pri);
-    background-color: rgb(7, 192, 7);
-    font-size: 16px;
-    border-radius: 6px;
+    color: #ffffff;
+    background-color: #4CAF50;
+    font-size: 15px;
+    border-radius: 8px;
     border: none;
     font-weight: bold;
     cursor: pointer;
 }
+
 .mark-imp {
     display: flex;
     align-items: center;
@@ -263,111 +285,113 @@ section.allElems {
     color: #ffffff;
     font-size: 16px;
 }
+
 #check {
-    accent-color: #FF6600;
+    accent-color: var(--sec);
     transform: scale(1.3);
     margin-right: 8px;
 }
 
 /* ---------------------------------------------------------
-   2. DAILY PLANNER & GOALS SHARED LAYOUT STYLES
+   2. DAILY PLANNER THEME & GLASSMORPHISM
    --------------------------------------------------------- */
-.planner-container, .goals-container {
+.daily-planner-fullpage {
+    background: linear-gradient(180deg, rgba(14, 16, 24, 0.72) 0%, rgba(14, 16, 24, 0.88) 100%), 
+                url("./images/planner_bg.jpg");
+    color: #ffffff;
+}
+
+.daily-planner-fullpage h1 { font-size: 35px; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+
+.planner-container {
     height: 80%;
     width: 100%;
     margin-top: 25px;
     display: flex;
     gap: 25px;
 }
-.planner-add, .goals-add {
-    width: 38%;
-    height: 100%;
-    background-color: var(--tri1);
-    border-radius: 15px;
+
+.planner-add, .planner-list {
+    background: rgba(22, 25, 36, 0.65) !important;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 16px;
     padding: 25px;
     display: flex;
     flex-direction: column;
     gap: 15px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
 }
-.planner-add h2, .planner-list h2, .goals-add h2, .goals-list-box h2 {
-    font-size: 24px;
-    color: #ffffff;
-}
-.planner-add form, .goals-add form {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-.planner-add form input, .planner-add form button,
-.goals-add form input, .goals-add form button {
+
+.planner-add { width: 38%; height: 100%; }
+.planner-list { width: 60%; height: 100%; }
+
+.planner-add h2, .planner-list h2 { font-size: 24px; color: #ffffff; }
+
+.planner-add form { display: flex; flex-direction: column; gap: 12px; }
+
+.planner-add form input {
     width: 100%;
-    padding: 12px 18px;
+    padding: 14px 18px;
     font-size: 18px;
     border-radius: 8px;
-    border: none;
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #ffffff;
     outline: none;
 }
-.planner-add form input, .goals-add form input {
-    background-color: var(--pri);
-    color: #ffffff;
-}
-.planner-add form button, .goals-add form button {
+
+.planner-add form button {
+    width: 100%;
+    padding: 14px 18px;
+    font-size: 18px;
+    border-radius: 8px;
     background-color: var(--red);
     color: #ffffff;
     font-weight: bold;
+    border: none;
     cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
 }
+
 .planner-notes textarea {
     width: 100%;
     padding: 15px;
     font-size: 16px;
     border-radius: 8px;
-    background-color: var(--pri);
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.15);
     color: #ffffff;
-    border: none;
     outline: none;
     resize: none;
 }
-.planner-list, .goals-list-box {
-    width: 60%;
-    height: 100%;
-    background-color: var(--tri1);
-    border-radius: 15px;
-    padding: 25px;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-.schedule-items, .all-goals {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    overflow-y: auto;
-    max-height: 100%;
-}
-.schedule-item, .goal-item {
+
+.schedule-items { display: flex; flex-direction: column; gap: 12px; overflow-y: auto; max-height: 100%; }
+
+.schedule-item {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: #f2eaee;
+    background: rgba(255, 255, 255, 0.92);
     color: var(--pri);
     padding: 14px 20px;
-    border-radius: 8px;
+    border-radius: 10px;
 }
+
 .schedule-item .time-tag {
     background-color: var(--sec);
     color: white;
-    padding: 4px 10px;
+    padding: 4px 12px;
     border-radius: 20px;
     font-size: 14px;
     font-weight: bold;
     margin-right: 12px;
 }
-.schedule-item span.task-name, .goal-item span.goal-text {
-    font-size: 20px;
-    font-weight: bold;
-}
-.schedule-item button, .goal-item button {
+
+.schedule-item span.task-name { font-size: 20px; font-weight: bold; }
+
+.schedule-item button {
     background-color: var(--red);
     color: white;
     border: none;
@@ -378,7 +402,127 @@ section.allElems {
 }
 
 /* ---------------------------------------------------------
-   3. AMBIENT PHOTOGRAPHIC POMODORO STYLES
+   3. DAILY GOALS THEME & GLASSMORPHISM
+   --------------------------------------------------------- */
+.daily-goals-fullpage {
+    background: linear-gradient(180deg, rgba(14, 16, 24, 0.72) 0%, rgba(14, 16, 24, 0.88) 100%), 
+                url("./images/goals_bg.jpg");
+    color: #ffffff;
+}
+
+.daily-goals-fullpage h1 { font-size: 35px; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+
+.goals-container {
+    height: 80%;
+    width: 100%;
+    margin-top: 25px;
+    display: flex;
+    gap: 25px;
+}
+
+.goals-add, .goals-list-box {
+    background: rgba(22, 25, 36, 0.65) !important;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 16px;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+}
+
+.goals-add { width: 38%; height: 100%; }
+.goals-list-box { width: 60%; height: 100%; }
+
+.goals-add h2, .goals-list-box h2 { font-size: 24px; color: #ffffff; }
+
+.goals-add form { display: flex; flex-direction: column; gap: 12px; }
+
+.goals-add form input {
+    width: 100%;
+    padding: 14px 18px;
+    font-size: 18px;
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+    outline: none;
+}
+
+.goals-add form button {
+    width: 100%;
+    padding: 14px 18px;
+    font-size: 18px;
+    border-radius: 8px;
+    background-color: var(--red);
+    color: #ffffff;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.goals-progress-box {
+    margin-top: 15px;
+    background: rgba(0, 0, 0, 0.4);
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.progress-bar-bg {
+    width: 100%;
+    height: 16px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 12px 0;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #c72878 0%, #ff5e62 100%);
+    transition: width 0.4s ease;
+}
+
+#goal-progress-text { font-size: 16px; color: var(--tri2); font-weight: bold; }
+
+.all-goals { display: flex; flex-direction: column; gap: 12px; overflow-y: auto; max-height: 100%; }
+
+.goal-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(255, 255, 255, 0.92);
+    color: var(--pri);
+    padding: 14px 20px;
+    border-radius: 10px;
+}
+
+.goal-item-left { display: flex; align-items: center; gap: 12px; }
+
+.goal-item input[type="checkbox"] { accent-color: var(--sec); transform: scale(1.4); cursor: pointer; }
+
+.goal-item span.goal-text { font-size: 20px; font-weight: bold; }
+
+.goal-item.completed span.goal-text { text-decoration: line-through; opacity: 0.5; }
+
+.goal-item button {
+    background-color: var(--red);
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* ---------------------------------------------------------
+   4. AMBIENT PHOTOGRAPHIC POMODORO STYLES
    --------------------------------------------------------- */
 section.pomodoro-full-page {
     position: relative !important;
@@ -433,6 +577,7 @@ section.pomodoro-full-page {
     width: 100%;
     height: 60px;
 }
+
 .pomo-logo {
     font-size: 22px;
     font-weight: 700;
@@ -458,11 +603,8 @@ section.pomodoro-full-page {
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
 }
 
-.pomo-modes {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 15px;
-}
+.pomo-modes { display: flex; gap: 10px; margin-bottom: 15px; }
+
 .pomo-tab {
     background: transparent;
     border: none;
@@ -475,6 +617,7 @@ section.pomodoro-full-page {
     opacity: 0.85;
     transition: all 0.3s ease;
 }
+
 .pomo-tab.active {
     background: #ffffff;
     color: #111319;
@@ -493,13 +636,8 @@ section.pomodoro-full-page {
     text-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
 }
 
-.pomo-start-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 15px;
-    width: 100%;
-}
+.pomo-start-wrapper { display: flex; align-items: center; justify-content: center; gap: 15px; width: 100%; }
+
 .pomo-start-btn {
     background: #ffffff;
     color: #111319;
@@ -512,6 +650,7 @@ section.pomodoro-full-page {
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
     transition: all 0.2s ease;
 }
+
 .pomo-start-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(255,255,255,0.25); }
 
 .pomo-action-icon {
@@ -530,46 +669,20 @@ section.pomodoro-full-page {
     justify-content: center;
     transition: all 0.2s ease;
 }
+
 .pomo-action-icon:hover { background: rgba(255, 255, 255, 0.35); transform: scale(1.1); }
 
-.pomo-session-info {
-    margin-top: 20px;
-    font-size: 18px;
-    color: rgba(255, 255, 255, 0.95);
-    font-weight: 600;
-}
+.pomo-session-info { margin-top: 20px; font-size: 18px; color: rgba(255, 255, 255, 0.95); font-weight: 600; }
 
 /* ---------------------------------------------------------
-   4. DAILY GOALS EXTRA STYLES
+   5. MOTIVATION THEME & GLASSMORPHISM
    --------------------------------------------------------- */
-.goals-progress-box {
-    margin-top: 15px;
-    background-color: var(--pri);
-    padding: 20px;
-    border-radius: 10px;
-    color: white;
+.motivation-fullpage {
+    background: linear-gradient(180deg, rgba(14, 16, 24, 0.72) 0%, rgba(14, 16, 24, 0.88) 100%), 
+                url("./images/motivation_bg.jpg");
+    color: #ffffff;
 }
-.progress-bar-bg {
-    width: 100%;
-    height: 16px;
-    background-color: #333;
-    border-radius: 10px;
-    overflow: hidden;
-    margin: 10px 0;
-}
-.progress-bar-fill {
-    height: 100%;
-    width: 0%;
-    background-color: var(--sec);
-    transition: width 0.4s ease;
-}
-#goal-progress-text { font-size: 16px; color: var(--tri2); font-weight: bold; }
-.goal-item-left { display: flex; align-items: center; gap: 12px; }
-.goal-item input[type="checkbox"] { accent-color: var(--sec); transform: scale(1.4); cursor: pointer; }
 
-/* ---------------------------------------------------------
-   5. MOTIVATION STYLES
-   --------------------------------------------------------- */
 .motivation-container {
     width: 100%;
     height: 80%;
@@ -578,24 +691,71 @@ section.pomodoro-full-page {
     align-items: center;
     justify-content: center;
 }
+
 .quote-card {
-    background-color: var(--tri1);
-    width: 700px;
-    padding: 45px;
+    background: rgba(22, 25, 36, 0.65) !important;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    width: 720px;
+    padding: 40px 45px;
     border-radius: 20px;
     text-align: center;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-.quote-icon { font-size: 55px; color: var(--sec); margin-bottom: 15px; }
-.quote-text { font-size: 24px; color: #ffffff; line-height: 1.5; margin-bottom: 20px; font-style: italic; }
-.quote-author { font-size: 20px; color: var(--tri2); margin-bottom: 35px; }
+
+.mood-title {
+    font-size: 24px;
+    color: #ffffff;
+    margin-bottom: 18px;
+}
+
+.mood-options {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.mood-btn {
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.mood-btn:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateY(-2px);
+}
+
+.mood-btn.active {
+    background: var(--sec);
+    border-color: var(--sec);
+    color: #ffffff;
+    box-shadow: 0 4px 15px rgba(199, 40, 120, 0.4);
+}
+
+.quote-icon { font-size: 50px; color: var(--sec); margin-bottom: 12px; }
+
+.quote-text { font-size: 22px; color: #ffffff; line-height: 1.5; margin-bottom: 18px; font-style: italic; }
+
+.quote-author { font-size: 18px; color: var(--tri2); margin-bottom: 30px; }
+
 .quote-actions { display: flex; gap: 15px; }
+
 .quote-actions button {
     padding: 12px 24px;
-    font-size: 18px;
+    font-size: 16px;
     border-radius: 8px;
     border: none;
     cursor: pointer;
@@ -603,6 +763,10 @@ section.pomodoro-full-page {
     display: flex;
     align-items: center;
     gap: 8px;
+    transition: transform 0.2s ease;
 }
+
+.quote-actions button:hover { transform: translateY(-2px); }
+
 #new-quote-btn { background-color: var(--sec); color: white; }
-#copy-quote-btn { background-color: var(--pri); color: white; }
+#copy-quote-btn { background-color: rgba(255,255,255,0.2); color: white; border: 1px solid rgba(255,255,255,0.3); }
