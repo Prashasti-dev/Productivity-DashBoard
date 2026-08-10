@@ -1,95 +1,132 @@
+/* =========================================================
+   PRODUCTIVITY DASHBOARD - CLEAN & OPTIMIZED STYLES
+   ========================================================= */
 
-:root{
-    --pri:#191C24;
-    --sec:#c72878;
-    --tri1:#4645aa;
-    --tri2:#F3797E;
-    --red: rgba(223, 43, 43, 0.84);
+:root {
+    --pri: #14161f;
+    --sec: #c72878;
+    --tri1: #4645aa;
+    --tri2: #F3797E;
+    --red: rgba(223, 43, 43, 0.88);
 }
-@font-face {
-    font-family: light;
-    src: url(./AeonikTRIAL-Light.otf);
-}
-@font-face {
-    font-family: regular;
-    src: url(./AeonikTRIAL-Regular.otf);
-}
-@font-face {
-    font-family: bold;
-    src: url(./AeonikTRIAL-Bold.otf);
-}
-@font-face {
-    font-family: regular-italic;
-    src: url(./AeonikTRIAL-RegularItalic.otf);
-}
-*{
+
+@font-face { font-family: light; src: url(./AeonikTRIAL-Light.otf); }
+@font-face { font-family: regular; src: url(./AeonikTRIAL-Regular.otf); }
+@font-face { font-family: bold; src: url(./AeonikTRIAL-Bold.otf); }
+@font-face { font-family: regular-italic; src: url(./AeonikTRIAL-RegularItalic.otf); }
+
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family:regular;
-    
+    font-family: regular, sans-serif;
 }
 
-html,body{
+html, body, #main {
     height: 100%;
     width: 100%;
+    overflow-x: hidden;
 }
 
-#main{
-    height: 100%;
-    width: 100%;
-    background-color: var(--pri);
+/* ---------------------------------------------------------
+   MAIN DASHBOARD & ATTRACTIVE BACKGROUND THEME
+   --------------------------------------------------------- */
+#main {
+    background: linear-gradient(180deg, rgba(17, 19, 25, 0.75) 0%, rgba(17, 19, 25, 0.9) 100%), 
+                url("https://images.unsplash.com/photo-1518655048521-f130df041f66?auto=format&fit=crop&w=1920&q=80") center/cover fixed;
+    position: relative;
 }
-nav{
+
+nav {
     position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 60px;
-    background-color: var(--sec);
-
+    background: rgba(199, 40, 120, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    display: flex;
+    align-items: center;
+    padding: 0 35px;
+    z-index: 100;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
 }
 
-section.allElems{
-    height: 100%;
+.nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 22px;
+    letter-spacing: -0.5px;
+}
+
+section.allElems {
+    min-height: 100%;
     width: 100%;
-    padding: 70px;
-    padding-top: 80px;
+    padding: 100px 50px 50px 50px;
     display: flex;
     flex-wrap: wrap;
-    align-items: flex-start;
-   
-    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
     position: absolute;
 }
-.elem{
-    background-color: var(--pri);
-    height: 400px;
-    width: 260px;
-    position: relative;
-    border-radius: 20px;
-    overflow:hidden;
-    transition: all ease 0.9s;
-    cursor: pointer;
-    box-shadow: 0 5px 20px rgba(166, 163, 163, 0.2);
-    color: black;
 
+/* Feature Cards */
+.elem {
+    background-color: var(--pri);
+    height: 380px;
+    width: 250px;
+    position: relative;
+    border-radius: 18px;
+    overflow: hidden;
+    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s ease;
+    cursor: pointer;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.15);
 }
-.elem img{
+
+.elem:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.6);
+}
+
+.elem:active {
+    transform: scale(0.97);
+}
+
+.elem img {
     height: 100%;
     width: 100%;
     object-fit: cover;
-}
-.elem h2{
-    position: absolute;
-    bottom: 2%;
-    right: 3%;
-    font-size: 20px;
-    font-weight: 100;
-}
-.elem:active{
-    scale: 0.97;
+    transition: transform 0.5s ease;
 }
 
-.fullElem{
+.elem:hover img {
+    transform: scale(1.08);
+}
+
+.elem h2 {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 30px 18px 15px 18px;
+    background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.85) 100%);
+    color: #ffffff;
+    font-size: 22px;
+    font-weight: 700;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+/* ---------------------------------------------------------
+   FULL-PAGE MODAL CONTAINER & BACK BUTTON
+   --------------------------------------------------------- */
+.fullElem {
     height: 100%;
     width: 100%;
     background-color: var(--pri);
@@ -98,37 +135,39 @@ section.allElems{
     font-size: 12px;
     display: none;
     position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 200;
 }
 
-.back{
+.back {
     position: absolute;
     top: 35px;
     right: 5%;
-    background-color: rgba(223, 43, 43, 0.84);
+    background-color: var(--red);
     border-radius: 50%;
     font-size: 20px;
     font-weight: 700;
     width: 44px;
-    height: 42px;
+    height: 44px;
     color: white;
     border: none;
     cursor: pointer;
-    z-index: 100;
+    z-index: 300;
     display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    transition: transform 0.2s ease;
 }
-.back:active{
-    scale: 0.95;
-}
+.back:hover { transform: scale(1.08); }
+.back:active { transform: scale(0.94); }
 
-/* .todo-list-fullpage{
-   display: block;
-} */
-.todo-list-fullpage h1{
-    font-size: 35px;
-}
-.todo-list-fullpage .todo-container{
+/* ---------------------------------------------------------
+   1. TO-DO LIST STYLES
+   --------------------------------------------------------- */
+.todo-list-fullpage h1 { font-size: 35px; }
+.todo-list-fullpage .todo-container {
     height: 80%;
     width: 100%;
     margin-top: 30px;
@@ -136,144 +175,111 @@ section.allElems{
     align-items: center;
     justify-content: space-between;
 }
-.todo-list-fullpage .todo-container .addTask{
+.todo-list-fullpage .todo-container .addTask {
     width: 33%;
     height: 100%;
     background-color: var(--tri1);
     border-radius: 15px;
-
 }
-.todo-list-fullpage .todo-container .allTask{
+.todo-list-fullpage .todo-container .allTask {
     width: 65%;
     height: 100%;
     background-color: var(--tri1);
-    border-radius: 5px;
+    border-radius: 15px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     padding: 30px;
-    overflow:auto;
-    
+    overflow-y: auto;
 }
-
-.todo-list-fullpage .todo-container .addTask form{
+.todo-list-fullpage .todo-container .addTask form {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 30px;
 }
-.todo-list-fullpage .todo-container form input{
+.todo-list-fullpage .todo-container form input,
+.todo-list-fullpage .todo-container form textarea {
     padding: 15px 25px;
     width: 100%;
-    font-size: 25px;
-    border-radius: 5px;
+    font-size: 22px;
+    border-radius: 8px;
     background-color: var(--pri);
     border: none;
     outline: none;
     color: #f2eaee;
     margin-bottom: 20px;
 }
-
-.todo-list-fullpage .todo-container form textarea{
-    padding: 15px 25px;
+.todo-list-fullpage .todo-container form button {
+    padding: 12px 22px;
     width: 100%;
-    font-size: 25px;
-    border-radius: 5px;
-    background-color: var(--pri);
-    color: #f2eaee;
+    font-size: 22px;
+    border-radius: 8px;
+    background-color: var(--red);
+    color: white;
     border: none;
-    outline: none;
-    margin-bottom: 20px;
-}
-.todo-list-fullpage .todo-container form button{
-        padding: 12px 22px;
-    width: 100%;
-    font-size: 25px;
-    border-radius: 5px;
-    background-color: rgba(223, 43, 43, 0.84);
-    border: none;
-    outline: none;
     font-weight: 700;
-    margin-bottom: 20px;
+    cursor: pointer;
 }
-.todo-list-fullpage .todo-container form button{
-  transition: transform 0.2s ease;
-}
-
-.todo-list-fullpage .todo-container form button:active{
-  transform: scale(0.95);
-}
-
-.task{
+.task {
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    font-size: 25px;
+    font-size: 22px;
     background-color: #f2eaee;
-     padding: 10px 15px;
-   border-radius: 5px;
-   margin-bottom: 15px;
-   
+    padding: 12px 18px;
+    border-radius: 8px;
+    margin-bottom: 15px;
 }
-.task h5{
+.task h5 {
     color: var(--pri);
-    font-size: 30px;
+    font-size: 24px;
     display: flex;
     align-items: center;
     gap: 10px;
 }
-.task h5 span{
+.task h5 span {
     background-color: red;
     color: white;
-    font-size: 10px;
-    padding: 4px 6px;
-    border-radius:50px;
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 50px;
 }
-.task h5 span.true{
-    opacity: 1;
-}
-.task h5 span.false{
-    opacity: 0;
-}
-.task button{
-    padding: 12px 22px;
+.task button {
+    padding: 10px 18px;
     color: var(--pri);
-    background-color:rgb(7, 192, 7);
-    font-size: 20x;
-    border-radius: 5px;
+    background-color: rgb(7, 192, 7);
+    font-size: 16px;
+    border-radius: 6px;
     border: none;
-    font-weight: 600;
+    font-weight: bold;
+    cursor: pointer;
 }
-.mark-imp{
-  display:flex;
-  align-items:center;
-  justify-content:flex-start;
-  margin:0;          /* remove left space */
-  padding:10px 0;
-  color:#000;
-  font:16px Arial;
+.mark-imp {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    color: #ffffff;
+    font-size: 16px;
 }
-
-
-
-#check{
-  accent-color:#FF6600;
-  transform:scale(1.3);
-  margin:0 6px 0 0;  /* small gap before text */
+#check {
+    accent-color: #FF6600;
+    transform: scale(1.3);
+    margin-right: 8px;
 }
 
-/* =========================================================
-   DAILY PLANNER STYLES
-   ========================================================= */
-.planner-container {
+/* ---------------------------------------------------------
+   2. DAILY PLANNER & GOALS SHARED LAYOUT STYLES
+   --------------------------------------------------------- */
+.planner-container, .goals-container {
     height: 80%;
     width: 100%;
     margin-top: 25px;
     display: flex;
     gap: 25px;
 }
-.planner-add {
+.planner-add, .goals-add {
     width: 38%;
     height: 100%;
     background-color: var(--tri1);
@@ -287,7 +293,7 @@ section.allElems{
     font-size: 24px;
     color: #ffffff;
 }
-.planner-add form {
+.planner-add form, .goals-add form {
     display: flex;
     flex-direction: column;
     gap: 12px;
@@ -310,16 +316,6 @@ section.allElems{
     color: #ffffff;
     font-weight: bold;
     cursor: pointer;
-    transition: transform 0.2s ease;
-}
-.planner-add form button:active, .goals-add form button:active {
-    transform: scale(0.96);
-}
-.planner-notes {
-    margin-top: 10px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
 }
 .planner-notes textarea {
     width: 100%;
@@ -332,7 +328,7 @@ section.allElems{
     outline: none;
     resize: none;
 }
-.planner-list {
+.planner-list, .goals-list-box {
     width: 60%;
     height: 100%;
     background-color: var(--tri1);
@@ -342,14 +338,14 @@ section.allElems{
     flex-direction: column;
     gap: 15px;
 }
-.schedule-items {
+.schedule-items, .all-goals {
     display: flex;
     flex-direction: column;
     gap: 12px;
     overflow-y: auto;
     max-height: 100%;
 }
-.schedule-item {
+.schedule-item, .goal-item {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -367,111 +363,11 @@ section.allElems{
     font-weight: bold;
     margin-right: 12px;
 }
-.schedule-item span.task-name {
+.schedule-item span.task-name, .goal-item span.goal-text {
     font-size: 20px;
     font-weight: bold;
 }
-.schedule-item button {
-    background-color: var(--red);
-    color: white;
-    border: none;
-    padding: 8px 14px;
-    height: 80%;
-    width: 100%;
-    margin-top: 25px;
-    display: flex;
-    gap: 25px;
-}
-.goals-add {
-    width: 38%;
-    height: 100%;
-    background-color: var(--tri1);
-    border-radius: 15px;
-    padding: 25px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-.goals-add form {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-.goals-progress-box {
-    margin-top: 15px;
-    background-color: var(--pri);
-    padding: 20px;
-    border-radius: 10px;
-    color: white;
-}
-.goals-progress-box h3 {
-    font-size: 18px;
-    margin-bottom: 10px;
-}
-.progress-bar-bg {
-    width: 100%;
-    height: 16px;
-    background-color: #333;
-    border-radius: 10px;
-    overflow: hidden;
-    margin-bottom: 10px;
-}
-.progress-bar-fill {
-    height: 100%;
-    width: 0%;
-    background-color: var(--sec);
-    transition: width 0.4s ease;
-}
-#goal-progress-text {
-    font-size: 16px;
-    color: var(--tri2);
-    font-weight: bold;
-}
-.goals-list-box {
-    width: 60%;
-    height: 100%;
-    background-color: var(--tri1);
-    border-radius: 15px;
-    padding: 25px;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-.all-goals {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    overflow-y: auto;
-    max-height: 100%;
-}
-.goal-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: #f2eaee;
-    color: var(--pri);
-    padding: 14px 20px;
-    border-radius: 8px;
-}
-.goal-item-left {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-.goal-item input[type="checkbox"] {
-    accent-color: var(--sec);
-    transform: scale(1.4);
-    cursor: pointer;
-}
-.goal-item span.goal-text {
-    font-size: 20px;
-    font-weight: bold;
-}
-.goal-item.completed span.goal-text {
-    text-decoration: line-through;
-    opacity: 0.5;
-}
-.goal-item button {
+.schedule-item button, .goal-item button {
     background-color: var(--red);
     color: white;
     border: none;
@@ -481,272 +377,9 @@ section.allElems{
     font-weight: bold;
 }
 
-/* =========================================================
-   MOTIVATION STYLES
-   ========================================================= */
-.motivation-container {
-    width: 100%;
-    height: 80%;
-    margin-top: 25px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.quote-card {
-    background-color: var(--tri1);
-    width: 700px;
-    padding: 45px;
-    border-radius: 20px;
-    text-align: center;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-.quote-icon {
-    font-size: 55px;
-    color: var(--sec);
-    margin-bottom: 15px;
-}
-.quote-text {
-    font-size: 24px;
-    color: #ffffff;
-    line-height: 1.5;
-    margin-bottom: 20px;
-    font-style: italic;
-}
-.quote-author {
-    font-size: 20px;
-    color: var(--tri2);
-    margin-bottom: 35px;
-}
-.quote-actions {
-    display: flex;
-    gap: 15px;
-}
-.quote-actions button {
-    padding: 12px 24px;
-    font-size: 18px;
-    border-radius: 8px;
-    border: none;
-    cursor: pointer;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    transition: transform 0.2s ease;
-}
-.quote-actions button:active {
-    transform: scale(0.95);
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    overflow-y: auto;
-    max-height: 100%;
-}
-.schedule-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: #f2eaee;
-    color: var(--pri);
-    padding: 14px 20px;
-    border-radius: 8px;
-}
-.schedule-item .time-tag {
-    background-color: var(--sec);
-    color: white;
-    padding: 4px 10px;
-    border-radius: 20px;
-    font-size: 14px;
-    font-weight: bold;
-    margin-right: 12px;
-}
-.schedule-item span.task-name {
-    font-size: 20px;
-    font-weight: bold;
-}
-.schedule-item button {
-    background-color: var(--red);
-    color: white;
-    border: none;
-    padding: 8px 14px;
-    height: 80%;
-    width: 100%;
-    margin-top: 25px;
-    display: flex;
-    gap: 25px;
-}
-.goals-add {
-    width: 38%;
-    height: 100%;
-    background-color: var(--tri1);
-    border-radius: 15px;
-    padding: 25px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-.goals-add form {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-.goals-progress-box {
-    margin-top: 15px;
-    background-color: var(--pri);
-    padding: 20px;
-    border-radius: 10px;
-    color: white;
-}
-.goals-progress-box h3 {
-    font-size: 18px;
-    margin-bottom: 10px;
-}
-.progress-bar-bg {
-    width: 100%;
-    height: 16px;
-    background-color: #333;
-    border-radius: 10px;
-    overflow: hidden;
-    margin-bottom: 10px;
-}
-.progress-bar-fill {
-    height: 100%;
-    width: 0%;
-    background-color: var(--sec);
-    transition: width 0.4s ease;
-}
-#goal-progress-text {
-    font-size: 16px;
-    color: var(--tri2);
-    font-weight: bold;
-}
-.goals-list-box {
-    width: 60%;
-    height: 100%;
-    background-color: var(--tri1);
-    border-radius: 15px;
-    padding: 25px;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-.all-goals {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    overflow-y: auto;
-    max-height: 100%;
-}
-.goal-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: #f2eaee;
-    color: var(--pri);
-    padding: 14px 20px;
-    border-radius: 8px;
-}
-.goal-item-left {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-.goal-item input[type="checkbox"] {
-    accent-color: var(--sec);
-    transform: scale(1.4);
-    cursor: pointer;
-}
-.goal-item span.goal-text {
-    font-size: 20px;
-    font-weight: bold;
-}
-.goal-item.completed span.goal-text {
-    text-decoration: line-through;
-    opacity: 0.5;
-}
-.goal-item button {
-    background-color: var(--red);
-    color: white;
-    border: none;
-    padding: 8px 14px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: bold;
-}
-
-/* =========================================================
-   MOTIVATION STYLES
-   ========================================================= */
-.motivation-container {
-    width: 100%;
-    height: 80%;
-    margin-top: 25px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.quote-card {
-    background-color: var(--tri1);
-    width: 700px;
-    padding: 45px;
-    border-radius: 20px;
-    text-align: center;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-.quote-icon {
-    font-size: 55px;
-    color: var(--sec);
-    margin-bottom: 15px;
-}
-.quote-text {
-    font-size: 24px;
-    color: #ffffff;
-    line-height: 1.5;
-    margin-bottom: 20px;
-    font-style: italic;
-}
-.quote-author {
-    font-size: 20px;
-    color: var(--tri2);
-    margin-bottom: 35px;
-}
-.quote-actions {
-    display: flex;
-    gap: 15px;
-}
-.quote-actions button {
-    padding: 12px 24px;
-    font-size: 18px;
-    border-radius: 8px;
-    border: none;
-    cursor: pointer;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    transition: transform 0.2s ease;
-}
-.quote-actions button:active {
-    transform: scale(0.95);
-}
-#new-quote-btn {
-    background-color: var(--sec);
-    color: white;
-}
-#copy-quote-btn {
-    background-color: var(--pri);
-    color: white;
-}
-
-/* =========================================================
-   AMBIENT PHOTOGRAPHIC BACKGROUND ENGINE & GLASSMORPHISM
-   ========================================================= */
-
+/* ---------------------------------------------------------
+   3. AMBIENT PHOTOGRAPHIC POMODORO STYLES
+   --------------------------------------------------------- */
 section.pomodoro-full-page {
     position: relative !important;
     padding: 0 !important;
@@ -754,7 +387,6 @@ section.pomodoro-full-page {
     background-color: #111319 !important;
 }
 
-/* Background Layers for 800ms Crossfade */
 .pomo-bg-layer {
     position: absolute;
     top: 0;
@@ -762,29 +394,25 @@ section.pomodoro-full-page {
     width: 100%;
     height: 100%;
     background-size: cover;
-    background-position: center center;
+    background-position: center;
     background-attachment: fixed;
     opacity: 0;
     transition: opacity 0.8s ease-in-out;
     z-index: 1;
 }
-.pomo-bg-layer.active {
-    opacity: 1;
-}
+.pomo-bg-layer.active { opacity: 1; }
 
-/* Dark Contrast Overlay for legibility */
 .pomo-photo-overlay {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle at center, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.6) 100%);
+    background: radial-gradient(circle at center, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.65) 100%);
     z-index: 2;
     pointer-events: none;
 }
 
-/* Outer Wrapper over photos */
 .pomofocus-wrapper {
     position: relative;
     z-index: 3;
@@ -798,7 +426,6 @@ section.pomodoro-full-page {
     align-items: center;
 }
 
-/* Glassmorphism Header */
 .pomo-header-nav {
     display: flex;
     align-items: center;
@@ -815,53 +442,20 @@ section.pomodoro-full-page {
     color: #ffffff;
     text-shadow: 0 2px 8px rgba(0,0,0,0.4);
 }
-.pomo-logo i {
-    font-size: 26px;
-}
-.pomo-header-actions {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-.header-btn {
-    background: rgba(255, 255, 255, 0.18);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    color: #ffffff;
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    border-radius: 8px;
-    padding: 8px 16px;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    transition: all 0.2s ease;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-}
-.header-btn:hover {
-    background: rgba(255, 255, 255, 0.3);
-    transform: translateY(-1px);
-}
-.header-btn:active {
-    transform: scale(0.96);
-}
 
-/* Floating Glassmorphism Timer Display Box */
 .pomo-ambient-content {
     width: 100%;
-    margin-top: 30px;
+    margin-top: 40px;
     background: rgba(255, 255, 255, 0.12);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 20px;
-    padding: 30px 40px;
+    padding: 35px 40px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
 }
 
 .pomo-modes {
@@ -881,9 +475,6 @@ section.pomodoro-full-page {
     opacity: 0.85;
     transition: all 0.3s ease;
 }
-.pomo-tab:hover {
-    opacity: 1;
-}
 .pomo-tab.active {
     background: #ffffff;
     color: #111319;
@@ -891,7 +482,6 @@ section.pomodoro-full-page {
     opacity: 1;
 }
 
-/* Large Clock Display */
 .pomo-timer-display {
     font-size: 130px;
     font-weight: 800;
@@ -903,7 +493,6 @@ section.pomodoro-full-page {
     text-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
 }
 
-/* Start Button & Action Icons */
 .pomo-start-wrapper {
     display: flex;
     align-items: center;
@@ -922,16 +511,8 @@ section.pomodoro-full-page {
     cursor: pointer;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
     transition: all 0.2s ease;
-    letter-spacing: 1px;
 }
-.pomo-start-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 30px rgba(255, 255, 255, 0.25);
-}
-.pomo-start-btn:active, .pomo-start-btn.running {
-    transform: translateY(2px);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-}
+.pomo-start-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(255,255,255,0.25); }
 
 .pomo-action-icon {
     background: rgba(255, 255, 255, 0.18);
@@ -949,190 +530,79 @@ section.pomodoro-full-page {
     justify-content: center;
     transition: all 0.2s ease;
 }
-.pomo-action-icon:hover {
-    background: rgba(255, 255, 255, 0.35);
-    transform: scale(1.1);
-}
+.pomo-action-icon:hover { background: rgba(255, 255, 255, 0.35); transform: scale(1.1); }
 
-/* Session Sub-text */
 .pomo-session-info {
     margin-top: 20px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 16px;
-    color: rgba(255, 255, 255, 0.9);
-}
-.session-count {
-    background: rgba(255, 255, 255, 0.2);
-    padding: 3px 10px;
-    border-radius: 20px;
-    font-weight: bold;
-}
-.session-status {
-    font-weight: 500;
-}
-
-/* Floating Glassmorphism Tasks Section */
-.pomo-tasks-section {
-    width: 100%;
-    margin-top: 25px;
-    background: rgba(255, 255, 255, 0.12);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 20px;
-    padding: 24px 30px;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
-}
-.tasks-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    color: #ffffff;
     font-size: 18px;
-    font-weight: 700;
-}
-.tasks-three-dots {
-    background: rgba(255, 255, 255, 0.2);
-    border: none;
-    color: white;
-    border-radius: 50%;
-    width: 34px;
-    height: 34px;
-    font-size: 18px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.tasks-divider {
-    width: 100%;
-    height: 1px;
-    background-color: rgba(255, 255, 255, 0.25);
-    margin: 12px 0 18px 0;
-}
-.tasks-list {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-bottom: 14px;
-}
-.task-card-item {
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(8px);
-    color: #222222;
-    border-radius: 10px;
-    padding: 14px 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    cursor: pointer;
-    transition: transform 0.15s ease;
-}
-.task-card-item:hover {
-    transform: translateY(-2px);
-}
-.task-card-item.completed {
-    opacity: 0.6;
-}
-.task-card-item.completed span.title {
-    text-decoration: line-through;
-}
-.task-card-item .task-left {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-.task-card-item .task-check {
-    font-size: 22px;
-    color: #888888;
-    cursor: pointer;
-}
-.task-card-item.completed .task-check {
-    color: #4CAF50;
-}
-.task-card-item span.title {
-    font-weight: 700;
-    font-size: 16px;
-}
-.task-card-item .task-del-btn {
-    background: transparent;
-    border: none;
-    color: #999999;
-    font-size: 18px;
-    cursor: pointer;
-}
-.task-card-item .task-del-btn:hover {
-    color: #e53935;
-}
-
-.add-task-card {
-    width: 100%;
-    background: rgba(255, 255, 255, 0.15);
-    border: 2px dashed rgba(255, 255, 255, 0.4);
-    border-radius: 10px;
-    padding: 14px;
-    text-align: center;
-    color: #ffffff;
-    font-weight: 700;
-    font-size: 16px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    transition: all 0.2s ease;
-}
-.add-task-card:hover {
-    background: rgba(255, 255, 255, 0.25);
-    border-color: rgba(255, 255, 255, 0.8);
-}
-
-.add-task-form {
-    background: #ffffff;
-    border-radius: 12px;
-    padding: 20px;
-    color: #333333;
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    margin-top: 10px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.25);
-}
-.add-task-form.hidden {
-    display: none;
-}
-.add-task-form input {
-    width: 100%;
-    border: none;
-    border-bottom: 2px solid #eeeeee;
-    font-size: 18px;
+    color: rgba(255, 255, 255, 0.95);
     font-weight: 600;
-    padding: 8px 0;
-    outline: none;
-    color: #333333;
-}
-.add-task-form .form-actions {
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-}
-.add-task-form button {
-    padding: 8px 18px;
-    font-weight: 700;
-    border-radius: 6px;
-    border: none;
-    cursor: pointer;
-    font-size: 14px;
-}
-.add-task-form .btn-cancel {
-    background-color: transparent;
-    color: #888888;
-}
-.add-task-form .btn-save {
-    background-color: #222222;
-    color: #ffffff;
 }
 
+/* ---------------------------------------------------------
+   4. DAILY GOALS EXTRA STYLES
+   --------------------------------------------------------- */
+.goals-progress-box {
+    margin-top: 15px;
+    background-color: var(--pri);
+    padding: 20px;
+    border-radius: 10px;
+    color: white;
+}
+.progress-bar-bg {
+    width: 100%;
+    height: 16px;
+    background-color: #333;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 10px 0;
+}
+.progress-bar-fill {
+    height: 100%;
+    width: 0%;
+    background-color: var(--sec);
+    transition: width 0.4s ease;
+}
+#goal-progress-text { font-size: 16px; color: var(--tri2); font-weight: bold; }
+.goal-item-left { display: flex; align-items: center; gap: 12px; }
+.goal-item input[type="checkbox"] { accent-color: var(--sec); transform: scale(1.4); cursor: pointer; }
+
+/* ---------------------------------------------------------
+   5. MOTIVATION STYLES
+   --------------------------------------------------------- */
+.motivation-container {
+    width: 100%;
+    height: 80%;
+    margin-top: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.quote-card {
+    background-color: var(--tri1);
+    width: 700px;
+    padding: 45px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.quote-icon { font-size: 55px; color: var(--sec); margin-bottom: 15px; }
+.quote-text { font-size: 24px; color: #ffffff; line-height: 1.5; margin-bottom: 20px; font-style: italic; }
+.quote-author { font-size: 20px; color: var(--tri2); margin-bottom: 35px; }
+.quote-actions { display: flex; gap: 15px; }
+.quote-actions button {
+    padding: 12px 24px;
+    font-size: 18px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+#new-quote-btn { background-color: var(--sec); color: white; }
+#copy-quote-btn { background-color: var(--pri); color: white; }
