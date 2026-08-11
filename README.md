@@ -10,4 +10,6 @@ The project focuses on a minimal and user-friendly interface rather than complex
 - **CSS3** – Styling and responsive layouts
 - **JavaScript** – Interactivity and functionality
 - **Local Storage** – Persisting user tasks, schedules, goals, and notes
-Deployed on **Vercel**
+  
+Deployed on
+**Vercel**
