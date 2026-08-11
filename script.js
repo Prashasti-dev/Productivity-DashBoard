@@ -12,8 +12,7 @@ function openFeatures() {
   let backBtns = document.querySelectorAll(".fullElem .back");
   let navHome = document.querySelector("#nav-home");
   let navFeatures = document.querySelector("#nav-features");
-  let featuresModal = document.querySelector("#features-modal");
-  let featuresCloseBtn = document.querySelector("#features-close-btn");
+  let featuresSection = document.querySelector("#features-section");
 
   allElems.forEach((elem) => {
     elem.addEventListener("click", () => {
@@ -29,20 +28,12 @@ function openFeatures() {
     });
   });
 
-  if (navFeatures && featuresModal) {
+  if (navFeatures && featuresSection) {
     navFeatures.addEventListener("click", (e) => {
       e.preventDefault();
-      featuresModal.style.display = "block";
+      featuresSection.scrollIntoView({ behavior: "smooth" });
       if (navHome) navHome.classList.remove("active");
       navFeatures.classList.add("active");
-    });
-  }
-
-  if (featuresCloseBtn && featuresModal) {
-    featuresCloseBtn.addEventListener("click", () => {
-      featuresModal.style.display = "none";
-      if (navHome) navHome.classList.add("active");
-      if (navFeatures) navFeatures.classList.remove("active");
     });
   }
 
@@ -120,18 +111,37 @@ function todolist() {
 
   function renderTask() {
     localStorage.setItem("currentTask", JSON.stringify(currentTask));
+    let validTasks = currentTask.filter(elem => elem.task && elem.details);
+
+    if (validTasks.length === 0) {
+      allTaskContainer.innerHTML = `
+        <div class="no-tasks-state">
+          <i class="ri-checkbox-blank-circle-line no-tasks-icon"></i>
+          <h3>No tasks yet</h3>
+          <p>Add something you'd like to accomplish today.</p>
+          <button class="add-first-task-btn">+ Add your first task</button>
+        </div>`;
+
+      let addFirstBtn = allTaskContainer.querySelector(".add-first-task-btn");
+      if (addFirstBtn) {
+        addFirstBtn.addEventListener("click", () => {
+          taskInput.focus();
+        });
+      }
+      return;
+    }
+
     let html = "";
-    currentTask.forEach((elem, idx) => {
-      if (!elem.task || !elem.details) return;
+    validTasks.forEach((elem, idx) => {
       html += `
         <div class="task">
           <details>
             <summary>
-              <h5>${elem.task} <span class="${elem.imp ? 'important' : ''}">imp</span></h5>
+              <h5>${elem.task} ${elem.imp ? '<span class="important">imp</span>' : ''}</h5>
             </summary>
             <p>${elem.details}</p>
           </details>
-          <button id="${idx}">Mark as completed</button>
+          <button class="complete-btn" id="${idx}">Mark as completed</button>
         </div>`;
     });
     allTaskContainer.innerHTML = html;
@@ -153,7 +163,7 @@ function todolist() {
   });
 
   allTaskContainer.addEventListener("click", (e) => {
-    if (e.target.tagName === "BUTTON") {
+    if (e.target.tagName === "BUTTON" && e.target.classList.contains("complete-btn")) {
       currentTask.splice(e.target.id, 1);
       renderTask();
     }
@@ -180,6 +190,21 @@ function dailyPlanner() {
   function renderSchedule() {
     localStorage.setItem("plannerSchedule", JSON.stringify(scheduleList));
     scheduleList.sort((a, b) => a.time.localeCompare(b.time));
+
+    if (scheduleList.length === 0) {
+      if (scheduleItemsContainer) scheduleItemsContainer.innerHTML = `
+        <div class="no-schedule-state">
+          <div class="no-schedule-icon">☀️</div>
+          <h3>Your day is clear</h3>
+          <p>Add an activity to start planning your day.</p>
+          <button class="add-first-slot-btn">+ Add activity</button>
+        </div>`;
+      let addSlotBtn = scheduleItemsContainer && scheduleItemsContainer.querySelector(".add-first-slot-btn");
+      if (addSlotBtn) {
+        addSlotBtn.addEventListener("click", () => { if (timeInput) timeInput.focus(); });
+      }
+      return;
+    }
 
     let html = "";
     scheduleList.forEach((item, index) => {
@@ -397,9 +422,24 @@ function dailyGoals() {
 
   function renderGoals() {
     localStorage.setItem("dailyGoals", JSON.stringify(goalsList));
-    let html = "";
     let completedCount = 0;
 
+    if (goalsList.length === 0) {
+      if (goalsContainer) goalsContainer.innerHTML = `
+        <div class="no-goals-state">
+          <div class="no-goals-icon">🏆</div>
+          <h3>No goals yet</h3>
+          <p>Set a goal to make the most of your day.</p>
+          <button class="add-first-goal-btn">+ Add your first goal</button>
+        </div>`;
+      let addGoalBtn = goalsContainer && goalsContainer.querySelector(".add-first-goal-btn");
+      if (addGoalBtn) addGoalBtn.addEventListener("click", () => { if (input) input.focus(); });
+      if (progressFill) progressFill.style.width = "0%";
+      if (progressText) progressText.textContent = "0% Completed (0/0)";
+      return;
+    }
+
+    let html = "";
     goalsList.forEach((goal, idx) => {
       if (goal.completed) completedCount++;
       html += `

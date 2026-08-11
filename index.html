@@ -7,7 +7,9 @@
     <title>Productivity DashBoard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;700;800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.9.0/fonts/remixicon.css" rel="stylesheet" />
 </head>
@@ -26,20 +28,20 @@
                 <a href="#" class="nav-item" id="nav-features">Features</a>
             </div>
             <div class="nav-right">
-                <span class="made-by-tag"><i class="ri-heart-3-fill"></i> Made by Prashasti</span>
-                <button class="theme-toggle-btn" id="theme-toggle-btn" title="Toggle Theme"><i class="ri-sun-line"></i></button>
+                <span class="made-by-tag">Made by Prashasti</span>
             </div>
         </nav>
 
         <!-- Main Dashboard Content Container -->
         <div class="dashboard-wrapper">
-            
+
             <!-- Welcome Hero Section -->
             <div class="hero-section">
                 <h1 class="hero-title">Make today count. ✨</h1>
                 <p class="hero-subtitle">Small steps. Consistent progress.</p>
                 <div class="hero-date-badge">
-                    <span id="hero-date-text">Tuesday, August 11</span> • <span id="hero-time-greeting">Good evening 👋</span>
+                    <span id="hero-date-text">Tuesday, August 11</span> • <span id="hero-time-greeting">Good evening
+                    </span>
                 </div>
             </div>
 
@@ -47,7 +49,6 @@
             <div class="todays-focus-banner">
                 <div class="focus-header">
                     <span class="focus-label"><i class="ri-sun-fill"></i> TODAY'S FOCUS</span>
-                    <span class="streak-badge"><i class="ri-fire-fill"></i> 3 day streak</span>
                 </div>
                 <p class="focus-quote">"Focus on what you can control."</p>
             </div>
@@ -101,6 +102,33 @@
                 </div>
             </div>
 
+            <!-- Features Section (Homepage Scrollable) -->
+            <section class="features-section" id="features-section">
+                <h2>✨ Features Overview</h2>
+                <div class="features-list-scroll">
+                    <div class="feature-item">
+                        <i class="ri-checkbox-line"></i>
+                        <span><strong>To Do List</strong>: Organize daily tasks and track completed items.</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="ri-calendar-event-line"></i>
+                        <span><strong>Daily Planner</strong>: Schedule hourly slots and store quick notes.</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="ri-timer-flash-line"></i>
+                        <span><strong>Pomodoro Timer</strong>: Focus using custom cycles and rest intervals.</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="ri-target-line"></i>
+                        <span><strong>Daily Goals</strong>: Establish healthy routines with live visual progress.</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="ri-emotion-happy-line"></i>
+                        <span><strong>Motivation</strong>: Check in on your mindset to get curated quotes.</span>
+                    </div>
+                </div>
+            </section>
+
             <!-- Footer Branding Credit -->
             <footer class="dashboard-footer">
                 <p>Made with <i class="ri-heart-fill"></i> by <span>Prashasti</span></p>
@@ -111,21 +139,22 @@
         <!-- Full Page Modals -->
         <section class="fullElem todo-list-fullpage">
             <button class="back" id="0"><i class="ri-close-line"></i></button>
-            <h1>Your Personalized Task List</h1>
-            <div class="todo-container">
-                <div class="addTask">
-                    <form>
-                        <input type="text" placeholder="Enter Task" required>
-                        <textarea placeholder="Enter Details" rows="6" cols="40" required></textarea>
-                        <div class="mark-imp">
-                            <input type="checkbox" id="check">
-                            <label for="check">Mark As Important!</label>
+            <h1>My Tasks</h1>
+            <h3>Stay organized and focus on what matters.<h3>
+                    <div class="todo-container">
+                        <div class="addTask">
+                            <form>
+                                <input type="text" placeholder="Enter Task" required>
+                                <textarea placeholder="Enter Details" rows="6" cols="40" required></textarea>
+                                <div class="mark-imp">
+                                    <input type="checkbox" id="check">
+                                    <label for="check">★ Mark As Important</label>
+                                </div>
+                                <button type="submit">Add Task</button>
+                            </form>
                         </div>
-                        <button type="submit">Add Task</button>
-                    </form>
-                </div>
-                <div class="allTask"></div>
-            </div>
+                        <div class="allTask"></div>
+                    </div>
         </section>
 
         <section class="fullElem daily-planner-fullpage">
@@ -135,13 +164,15 @@
                 <div class="planner-add">
                     <h2>Add Schedule</h2>
                     <form id="planner-form">
+                        <label for="planner-time" class="time-input-label">Select Time</label>
                         <input type="time" id="planner-time" required>
                         <input type="text" id="planner-task" placeholder="Enter activity..." required>
                         <button type="submit">Add Slot</button>
                     </form>
                     <div class="planner-notes">
                         <h2>Quick Notes</h2>
-                        <textarea id="planner-notes-input" rows="7" placeholder="Jot down notes for today..."></textarea>
+                        <textarea id="planner-notes-input" rows="7"
+                            placeholder="Jot down notes for today..."></textarea>
                     </div>
                 </div>
                 <div class="planner-list">
@@ -177,8 +208,10 @@
 
                     <div class="pomo-start-wrapper">
                         <button class="pomo-start-btn" id="pomo-start">START</button>
-                        <button class="pomo-action-icon" id="pomo-reset-btn" title="Reset Timer"><i class="ri-restart-line"></i></button>
-                        <button class="pomo-action-icon" id="pomo-skip" title="Skip Session"><i class="ri-skip-forward-fill"></i></button>
+                        <button class="pomo-action-icon" id="pomo-reset-btn" title="Reset Timer"><i
+                                class="ri-restart-line"></i></button>
+                        <button class="pomo-action-icon" id="pomo-skip" title="Skip Session"><i
+                                class="ri-skip-forward-fill"></i></button>
                     </div>
 
                     <div class="pomo-session-info">
@@ -238,54 +271,6 @@
             </div>
         </section>
 
-        <!-- Features Modal Section -->
-        <section class="fullElem features-fullpage" id="features-modal">
-            <button class="back" id="features-close-btn"><i class="ri-close-line"></i></button>
-            <h1>✨ Features Overview</h1>
-            <p class="features-subtitle">Discover everything your Productivity Dashboard can do</p>
-
-            <div class="features-scroll-box">
-                <div class="feature-item-card">
-                    <div class="feature-item-icon"><i class="ri-checkbox-line"></i></div>
-                    <div class="feature-item-content">
-                        <h3>1. To Do List</h3>
-                        <p>Organize your daily tasks with priority tags (imp) and instant completion tracking. All tasks are saved locally for offline focus.</p>
-                    </div>
-                </div>
-
-                <div class="feature-item-card">
-                    <div class="feature-item-icon"><i class="ri-calendar-event-line"></i></div>
-                    <div class="feature-item-content">
-                        <h3>2. Daily Planner</h3>
-                        <p>Schedule your day time-slot by time-slot and keep persistent quick notes for all your ideas, reminders, and daily thoughts.</p>
-                    </div>
-                </div>
-
-                <div class="feature-item-card">
-                    <div class="feature-item-icon"><i class="ri-timer-flash-line"></i></div>
-                    <div class="feature-item-content">
-                        <h3>3. Pomodoro Timer</h3>
-                        <p>Stay in deep focus with ambient photographic backgrounds, 25-minute focus cycles, break intervals, and subtle audio completion chimes.</p>
-                    </div>
-                </div>
-
-                <div class="feature-item-card">
-                    <div class="feature-item-icon"><i class="ri-target-line"></i></div>
-                    <div class="feature-item-content">
-                        <h3>4. Daily Goals</h3>
-                        <p>Set clear daily targets, track live visual progress completion bars, and check off achievements as you move through your day.</p>
-                    </div>
-                </div>
-
-                <div class="feature-item-card">
-                    <div class="feature-item-icon"><i class="ri-emotion-happy-line"></i></div>
-                    <div class="feature-item-content">
-                        <h3>5. Motivation & Mood Check-In</h3>
-                        <p>Check in with how you're feeling today (Great, Good, Okay, Low) and receive instant curated quotes tailored to your exact mindset.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
 
     </div>
     <script src="script.js"></script>
