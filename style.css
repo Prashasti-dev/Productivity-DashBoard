@@ -1458,3 +1458,93 @@ section.pomodoro-full-page {
     color: var(--sec);
     flex-shrink: 0;
 }
+
+/* ---------------------------------------------------------
+   7. RESPONSIVE DESIGN (MEDIA QUERIES)
+   --------------------------------------------------------- */
+@media screen and (max-width: 992px) {
+    .dashboard-grid, .bottom-cards-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .dashboard-wrapper {
+        padding-top: 80px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    
+    .card-featured {
+        height: 300px;
+    }
+    
+    .card-stacked, .card-bottom {
+        height: 220px;
+    }
+    
+    .todo-list-fullpage .todo-container,
+    .planner-container,
+    .goals-container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .todo-list-fullpage .todo-container .addTask,
+    .todo-list-fullpage .todo-container .allTask,
+    .planner-add,
+    .planner-list,
+    .goals-add,
+    .goals-list-box {
+        width: 100%;
+        min-height: auto;
+    }
+
+    .todo-list-fullpage .todo-container .allTask,
+    .planner-list,
+    .goals-list-box {
+        max-height: 50vh;
+    }
+    
+    .quote-card {
+        width: 100%;
+        padding: 30px 20px;
+    }
+    
+    .fullElem {
+        padding: 30px 20px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    nav {
+        padding: 0 15px;
+    }
+    
+    .nav-links {
+        display: none;
+    }
+    
+    .hero-title {
+        font-size: 32px;
+    }
+    
+    .hero-subtitle {
+        font-size: 16px;
+    }
+    
+    .pomo-timer-display {
+        font-size: 80px;
+    }
+    
+    .pomo-start-btn {
+        padding: 12px 40px;
+        font-size: 18px;
+    }
+
+    .todo-list-fullpage h1,
+    .daily-planner-fullpage h1,
+    .daily-goals-fullpage h1,
+    .motivation-fullpage h1 {
+        font-size: 26px;
+        margin-top: 30px;
+    }
+}
